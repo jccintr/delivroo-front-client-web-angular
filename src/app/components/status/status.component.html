@@ -1,0 +1,16 @@
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border shadow-sm"
+     [ngClass]="{
+       'bg-green-50 border-green-100': status,
+       'bg-red-50 border-red-100': !status
+     }">
+    <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+              [ngClass]="status ? 'bg-green-400' : 'bg-red-400'"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2"
+              [ngClass]="status ? 'bg-green-500' : 'bg-red-500'"></span>
+    </span>
+    <span class="text-xs font-bold"
+          [ngClass]="status ? 'text-green-700' : 'text-red-700'">
+        {{ status ? 'Aberto' : 'Fechado' }}
+    </span>
+</div>
