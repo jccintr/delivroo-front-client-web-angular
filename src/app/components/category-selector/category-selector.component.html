@@ -1,0 +1,28 @@
+<div class="sticky top-[105px] z-40 bg-[#f8f6f5] py-3 pl-4 border-b border-transparent">
+      <div class="flex gap-3 overflow-x-auto no-scrollbar pr-4 pb-1"> <!-- pb-1 para evitar corte de sombra -->
+        @for (category of categories; track category.id) {
+          <button
+            type="button"
+            (click)="selectCategory(category)"
+            [class.bg-[#f2460d]]="selectedCategory?.id === category.id"
+            [class.text-white]="selectedCategory?.id === category.id"
+            [class.shadow-md]="selectedCategory?.id === category.id"
+            [class.shadow-primary]="selectedCategory?.id === category.id"
+            [class.bg-white]="selectedCategory?.id !== category.id"
+            [class.border]="selectedCategory?.id !== category.id"
+            [class.border-gray-200]="selectedCategory?.id !== category.id"
+            [class.text-gray-700]="selectedCategory?.id !== category.id"
+            class="flex items-center justify-center px-4 h-9 shrink-0 rounded-full 
+                   border border-gray-200 
+                   text-sm font-medium 
+                   transition-all duration-200 
+                   active:scale-95 
+                   hover:border-primary/50"
+          >
+            <span [class.font-bold]="selectedCategory?.id === category.id">
+              {{ category.nome }}
+            </span>
+          </button>
+        }
+      </div>
+    </div>

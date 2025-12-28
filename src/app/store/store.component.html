@@ -1,2 +1,9 @@
 <app-header [storeData]="storeData"></app-header>
-
+<main class="flex flex-col w-full">
+    <app-search></app-search>
+    <app-category-selector
+       [categories]="categories"
+       [selectedId]="selectedCategoryId"
+       (categoryChange)="onCategorySelect($event)"
+></app-category-selector>
+</main>

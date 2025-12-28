@@ -3,10 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { StoreService } from '../services/store.service';
 import { Subscription } from 'rxjs';
 import { HeaderComponent } from "../components/header/header.component";
+import { Category, CategorySelectorComponent } from "../components/category-selector/category-selector.component";
+import { SearchComponent } from "../components/search/search.component";
 
 @Component({
   selector: 'app-store',
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, CategorySelectorComponent, SearchComponent],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css'
 })
@@ -14,6 +16,8 @@ export class StoreComponent implements OnInit, OnDestroy {
   storeName: string = '';
   store: any = {};
   storeData: any = {};
+  categories: any[] = [];
+  selectedCategoryId: number = 1;
    private subscription: Subscription = new Subscription();
   
   constructor(private route: ActivatedRoute, private storeService: StoreService) {}
@@ -38,17 +42,27 @@ export class StoreComponent implements OnInit, OnDestroy {
           logo: this.storeService.BASE_STORAGE + '/' +  this.store.logotipo,
           isOpen: this.store.aberto
         }
+        this.categories = response.categorias;
+        if (this.categories.length > 0) {
+            this.selectedCategoryId = this.categories[0].id;
+         }
       },
       error: (error) => {
         console.error('Erro ao carregar dados da loja:', error);
       },
     });
-    console.log(this.storeName);
+   
+    
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
  
+  onCategorySelect(category: Category) {
+     this.selectedCategoryId = category.id;
+     console.log('Categoria selecionada:', category);
+     // Aqui você pode filtrar produtos, etc.
+  }
 
 }
