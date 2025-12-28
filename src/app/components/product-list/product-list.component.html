@@ -1,1 +1,6 @@
-<p>product-list works!</p>
+<div class="px-4 py-2 sticky top-[150px] z-30 bg-background-light/95 backdrop-blur-sm">
+    <h3 class="text-lg font-bold text-[#181311] ">Produtos</h3>
+</div>
+@for (product of products; track product.id) {
+    <app-product-card [product]="product"></app-product-card>
+ }

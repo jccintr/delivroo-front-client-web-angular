@@ -5,10 +5,11 @@ import { Subscription } from 'rxjs';
 import { HeaderComponent } from "../components/header/header.component";
 import { Category, CategorySelectorComponent } from "../components/category-selector/category-selector.component";
 import { SearchComponent } from "../components/search/search.component";
+import { ProductListComponent } from "../components/product-list/product-list.component";
 
 @Component({
   selector: 'app-store',
-  imports: [HeaderComponent, CategorySelectorComponent, SearchComponent],
+  imports: [HeaderComponent, CategorySelectorComponent, SearchComponent, ProductListComponent],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css'
 })
@@ -17,6 +18,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   store: any = {};
   storeData: any = {};
   categories: any[] = [];
+  products: any[] = [];
   selectedCategoryId: number = 1;
    private subscription: Subscription = new Subscription();
   
@@ -46,6 +48,7 @@ export class StoreComponent implements OnInit, OnDestroy {
         if (this.categories.length > 0) {
             this.selectedCategoryId = this.categories[0].id;
          }
+         this.products = response.produtos;
       },
       error: (error) => {
         console.error('Erro ao carregar dados da loja:', error);

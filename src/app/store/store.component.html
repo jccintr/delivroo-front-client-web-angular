@@ -4,6 +4,9 @@
     <app-category-selector
        [categories]="categories"
        [selectedId]="selectedCategoryId"
-       (categoryChange)="onCategorySelect($event)"
-></app-category-selector>
+       (categoryChange)="onCategorySelect($event)">
+    </app-category-selector>
+    <section class="mt-2">
+      <app-product-list [products]="products"></app-product-list>
+    </section>
 </main>
