@@ -20,7 +20,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   categories: any[] = [];
   products: any[] = [];
   filteredProducts: any[] = [];   
-  searchTerm = signal('');;
+  searchTerm = signal('');
   selectedCategoryId: number = 1;
    private subscription: Subscription = new Subscription();
   
@@ -92,8 +92,14 @@ export class StoreComponent implements OnInit, OnDestroy {
  */
   onCategorySelect(category: Category) {
      this.selectedCategoryId = category.id;
-    
-     // Aqui você pode filtrar produtos, etc.
+    setTimeout(() => {
+      const element = document.getElementById('categoria-' + category.id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      }
+    }, 200); // 100ms cos
+     
   }
 
 }

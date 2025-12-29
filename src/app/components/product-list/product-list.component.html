@@ -4,7 +4,7 @@
 
 <!-- Loop por categorias agrupadas -->
 @for (group of categorizedProducts; track group.category.id) {
-  <div class="mt-4">
+  <div [id]="'categoria-' + group.category.id" class="mt-4 scroll-mt-48">
     <!-- Título da categoria -->
     <h4 class="px-4 text-xl font-semibold text-primary mb-4">
       {{ group.category.nome  }}
