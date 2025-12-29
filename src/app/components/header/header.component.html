@@ -1,10 +1,10 @@
-<header class="sticky top-0 z-50 bg-white/95 dark:bg-surface-dark/95 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-[#3E2D29]">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 ">
     <div class="flex items-center justify-between px-4 pt-4 pb-2">
        <div class="flex items-center gap-2">
-          <div class="flex items-center justify-center size-8 rounded-full bg--[#f2460d]/10 text-primary">
-             <span class="material-symbols-outlined text-xl text-[#f2460d]">lunch_dining</span>
+          <div class="flex items-center justify-center size-8 rounded-full bg-primary/10 text-primary">
+             <span class="material-symbols-outlined text-xl text-primary">lunch_dining</span>
           </div>
-          <h1 class="text-xl font-extrabold tracking-tight text-[#f2460d]">Delivroo</h1>
+          <h1 class="text-xl font-extrabold tracking-tight text-primary">Delivroo</h1>
        </div>
    
     </div>
@@ -12,16 +12,16 @@
     <div class="px-4 pb-4">
        <div class="flex items-center justify-between">
           <div class="flex items-start gap-3">
-             <div class="size-20 rounded-lg bg-gray-200 bg-cover bg-center shrink-0 border border-gray-100 dark:border-white/10" data-alt="Restaurant logo showing a stylized chef hat" style="background-image: url({{storeData.logo}});"></div>
+             <div class="size-20 rounded-lg bg-gray-200 bg-cover bg-center shrink-0 border border-gray-100" data-alt="Restaurant logo" style="background-image: url({{storeData.logo}});"></div>
                 <div class="flex flex-col">
                    <div class="flex flex-row items-center gap-1">
                       <h2 class="text-base font-bold leading-tight">{{storeData.name}}</h2>
                       <span class="material-symbols-outlined text-[14px] text-green-600" title="Verified">verified</span>
                    </div>
-                   <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 flex items-center gap-1">
-                   <span class="material-symbols-outlined text-[12px] text-[#f2460d]">location_on</span>{{storeData.address}}</p>
-                   <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 flex items-center gap-1">
-                   <span class="material-symbols-outlined text-[12px] text-[#f2460d]">call</span>{{storeData.phone}}</p>
+                   <p class="text-xs text-gray-500  mt-0.5 flex items-center gap-1">
+                   <span class="material-symbols-outlined text-[12px] text-primary">location_on</span>{{storeData.address}}</p>
+                   <p class="text-xs text-gray-500  mt-0.5 flex items-center gap-1">
+                   <span class="material-symbols-outlined text-[12px] text-primary">call</span>{{storeData.phone}}</p>
                 </div>
              </div>
              <app-status [status]="storeData.isOpen"></app-status>
