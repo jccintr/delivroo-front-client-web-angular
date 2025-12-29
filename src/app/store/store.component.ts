@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, effect, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from '../services/store.service';
 import { Subscription } from 'rxjs';
@@ -19,10 +19,21 @@ export class StoreComponent implements OnInit, OnDestroy {
   storeData: any = {};
   categories: any[] = [];
   products: any[] = [];
+  filteredProducts: any[] = [];   
+  searchTerm = signal('');;
   selectedCategoryId: number = 1;
    private subscription: Subscription = new Subscription();
   
-  constructor(private route: ActivatedRoute, private storeService: StoreService) {}
+  constructor(private route: ActivatedRoute, private storeService: StoreService) {
+    
+    effect(() => {
+      const termo = this.searchTerm().toLowerCase();
+      this.filteredProducts = this.products.filter((product) =>
+        product.nome.toLowerCase().includes(termo) || product.descricao.toLowerCase().includes(termo)
+      );
+     
+    });
+  }
 
   ngOnInit(): void {
     this.storeName = this.route.snapshot.paramMap.get('store')!;
@@ -44,11 +55,14 @@ export class StoreComponent implements OnInit, OnDestroy {
           logo: this.storeService.BASE_STORAGE + '/' +  this.store.logotipo,
           isOpen: this.store.aberto
         }
+       
         this.categories = response.categorias;
         if (this.categories.length > 0) {
             this.selectedCategoryId = this.categories[0].id;
          }
          this.products = response.produtos;
+         this.filteredProducts = [...this.products];
+        
       },
       error: (error) => {
         console.error('Erro ao carregar dados da loja:', error);
@@ -61,10 +75,24 @@ export class StoreComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
- 
+/*
+  onSearch(term: string) {
+    this.searchTerm = term;
+
+    if (!term) {
+      this.filteredProducts = [...this.products]; // sem filtro
+    } else {
+      this.filteredProducts = this.products.filter(product =>
+        product.nome?.toLowerCase().includes(term) ||
+        product.descricao?.toLowerCase().includes(term)
+        // adicione outros campos se quiser (ex: código, marca, etc.)
+      );
+    }
+  }
+ */
   onCategorySelect(category: Category) {
      this.selectedCategoryId = category.id;
-     console.log('Categoria selecionada:', category);
+    
      // Aqui você pode filtrar produtos, etc.
   }
 

@@ -1,12 +1,12 @@
 <app-header [storeData]="storeData"></app-header>
 <main class="flex flex-col w-full">
-    <app-search></app-search>
+    <app-search (setSearchText)="searchTerm.set($event)"></app-search>
     <app-category-selector
        [categories]="categories"
        [selectedId]="selectedCategoryId"
        (categoryChange)="onCategorySelect($event)">
     </app-category-selector>
     <section class="mt-2">
-      <app-product-list [products]="products" [categories]="categories"></app-product-list>
+      <app-product-list [products]="filteredProducts" [categories]="categories"></app-product-list>
     </section>
 </main>

@@ -49,5 +49,6 @@ export class ProductListComponent implements OnChanges{
         products: map.get(cat.id) || []
       }))
       .filter(item => item.products.length > 0); // opcional: remove categorias vazias
+      
   }
 }
