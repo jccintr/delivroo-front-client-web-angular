@@ -10,11 +10,11 @@
       {{ group.category.nome  }}
     </h4>
 
-   
+   <div class="md:grid grid-cols-2 gap-4 px-4 lg:grid-cols-3">
       @for (product of group.products; track product.id) {
         <app-product-card [product]="product"></app-product-card>
       }
-   
+   </div>
   </div>
 }
 
