@@ -8,12 +8,12 @@
             <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{product.descricao}}</p>
          </div>
          <div class="flex items-center justify-between mt-2">
-            <span class="font-bold text-[#f2460d]">R$ {{product.preco}}</span>
+            <span class="font-bold text-primary">R$ {{product.preco}}</span>
          </div>
        </div>
        <div class="relative shrink-0 w-28 h-28">
           <div class="w-full h-full bg-cover bg-center rounded-lg" data-alt="Creamy shrimp risotto served in a white ceramic bowl" [ngStyle]="{'background-image': 'url(' + storeService.BASE_STORAGE + '/' + product.imagem + ')'}"></div>
-          <button class="absolute -bottom-2 -right-2 bg-white text-[#f2460d] p-2 rounded-full shadow-lg border border-gray-100  active:scale-95 transition-transform flex items-center justify-center">
+          <button class="absolute -bottom-2 -right-2 bg-white text-primary p-2 rounded-full shadow-lg border border-gray-100  active:scale-95 transition-transform flex items-center justify-center">
              <span class="material-symbols-outlined">add</span>
           </button>
        </div>
