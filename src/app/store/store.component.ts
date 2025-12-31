@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StoreService } from '../services/store.service';
 import { Subscription } from 'rxjs';
 import { HeaderComponent } from "../components/header/header.component";
@@ -24,7 +24,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   selectedCategoryId: number = 1;
    private subscription: Subscription = new Subscription();
   
-  constructor(private route: ActivatedRoute, private storeService: StoreService) {
+  constructor(private route: ActivatedRoute, private storeService: StoreService,private router: Router) {
     
     effect(() => {
       const termo = this.searchTerm().toLowerCase();
@@ -37,15 +37,7 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storeName = this.route.snapshot.paramMap.get('store')!;
-    /*
-    //  loja não existe
-    if (!nomeLoja ) {
-      this.router.navigate(['/404']); 
-      // ou: this.router.navigate(['/notfound']);
-      return;
-    }
-    */
-   this.subscription = this.storeService.getStoreData(this.storeName).subscribe({
+    this.subscription = this.storeService.getStoreData(this.storeName).subscribe({
       next: (response) => {
         this.store = response;
         this.storeData = {
@@ -66,6 +58,7 @@ export class StoreComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error('Erro ao carregar dados da loja:', error);
+        this.router.navigate(['/storeNotFound']);
       },
     });
    
@@ -75,21 +68,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-/*
-  onSearch(term: string) {
-    this.searchTerm = term;
 
-    if (!term) {
-      this.filteredProducts = [...this.products]; // sem filtro
-    } else {
-      this.filteredProducts = this.products.filter(product =>
-        product.nome?.toLowerCase().includes(term) ||
-        product.descricao?.toLowerCase().includes(term)
-        // adicione outros campos se quiser (ex: código, marca, etc.)
-      );
-    }
-  }
- */
   onCategorySelect(category: Category) {
      this.selectedCategoryId = category.id;
     setTimeout(() => {
