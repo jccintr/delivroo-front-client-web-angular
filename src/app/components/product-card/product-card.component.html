@@ -12,8 +12,8 @@
          </div>
        </div>
        <div class="relative shrink-0 w-28 h-28">
-          <div class="w-full h-full bg-cover bg-center rounded-lg" data-alt="Creamy shrimp risotto served in a white ceramic bowl" [ngStyle]="{'background-image': 'url(' + storeService.BASE_STORAGE + '/' + product.imagem + ')'}"></div>
-          <button class="absolute -bottom-2 -right-2 bg-white text-primary p-2 rounded-full shadow-lg border border-gray-100  active:scale-95 transition-transform flex items-center justify-center">
+          <div class="w-full h-full bg-cover bg-center rounded-lg" data-alt="product image" [ngStyle]="{'background-image': 'url(' + storeService.BASE_STORAGE + '/' + product.imagem + ')'}"></div>
+          <button (click)="viewProductDetails(product)" class="absolute -bottom-2 -right-2 bg-white text-primary p-2 rounded-full shadow-lg border border-gray-100  active:scale-95 transition-transform flex items-center justify-center">
              <span class="material-symbols-outlined">add</span>
           </button>
        </div>

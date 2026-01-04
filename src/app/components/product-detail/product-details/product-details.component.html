@@ -1,0 +1,14 @@
+<app-product-header 
+   [image]="productData.imagem"
+>
+</app-product-header>
+<app-product-description 
+   [name]="productData.nome" 
+   [description]="productData.descricao" 
+   [price]="productData.preco"
+   [waitTime]="waitTime"
+>
+</app-product-description>
+@for (required of productData.obrigatorios;track $index) {
+    <app-product-required-item [item]="required"></app-product-required-item>
+}

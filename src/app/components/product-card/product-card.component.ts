@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -10,8 +11,13 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductCardComponent {
 
-  constructor(public storeService: StoreService) {}
+  constructor(public storeService: StoreService,private router: Router) {}
 
    @Input() product: any = {};
+
+    viewProductDetails(product: any) {
+     // console.log(product)
+      this.router.navigate(['/product'], { state: { product } });
+    }
 
 }
