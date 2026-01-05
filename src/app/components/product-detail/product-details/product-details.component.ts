@@ -4,10 +4,11 @@ import { ProductHeaderComponent } from "../product-header/product-header.compone
 import { ProductDescriptionComponent } from "../product-description/product-description.component";
 import { StoreService } from '../../../services/store.service';
 import { ProductRequiredItemComponent } from "../product-required-item/product-required-item.component";
+import { ProductExtrasComponent } from "../product-extras/product-extras.component";
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductHeaderComponent, ProductDescriptionComponent, ProductRequiredItemComponent],
+  imports: [ProductHeaderComponent, ProductDescriptionComponent, ProductRequiredItemComponent, ProductExtrasComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
