@@ -16,4 +16,9 @@
   <app-product-extras [extras]="productData.adicionais"></app-product-extras>
 }
 <app-product-instructions></app-product-instructions>
-<app-product-add></app-product-add>
+<app-product-add 
+  [productTotal]="productTotal" 
+  [quantity]="quantity"
+  (quantityChange)="onQuantityChange($event)"
+  >
+</app-product-add>

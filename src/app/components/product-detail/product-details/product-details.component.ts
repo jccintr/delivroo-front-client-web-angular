@@ -17,14 +17,24 @@ import { ProductAddComponent } from "../product-add/product-add.component";
 export class ProductDetailsComponent implements OnInit{
   productData: any = {}; 
   waitTime: string = '';
+  productTotal: number = 0;
+  quantity: number = 1;
   constructor(private router: Router,private storeService: StoreService) {}
   
   ngOnInit(): void {
     const product = history.state.product;  
     if (product) {
       this.productData = product;
+      this.productTotal = this.quantity * product.preco;
       this.waitTime = this.storeService.getWaitTime();
     }
   }
+
+  onQuantityChange(newQuantity: number) {
+    this.quantity = newQuantity;
+    this.productTotal = this.quantity * this.productData.preco;
+  }
+
+
 
 }
