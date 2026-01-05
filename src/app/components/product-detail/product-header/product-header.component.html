@@ -2,9 +2,6 @@
    <button (click)="back()" class="pointer-events-auto flex items-center justify-center size-10 rounded-full bg-white/80 backdrop-blur-sm shadow-sm hover:bg-white transition-colors">
       <span class="material-symbols-outlined text-slate-800 " style="font-size: 20px;">arrow_back</span>
    </button>
-   <button class="pointer-events-auto flex items-center justify-center size-10 rounded-full bg-white/80  backdrop-blur-sm shadow-sm hover:bg-white transition-colors group">
-      <span class="material-symbols-outlined text-slate-800  group-hover:text-red-500 transition-colors" style="font-size: 20px;">favorite</span>
-   </button>
 </div>
 <div class="relative w-full h-80 md:h-96">
    <div class="absolute inset-0 bg-cover bg-center" data-alt="product image" [ngStyle]="{'background-image': 'url(' + storeService.BASE_STORAGE + '/' + image + ')'}">
