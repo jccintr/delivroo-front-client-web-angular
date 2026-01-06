@@ -13,7 +13,8 @@
             type="radio"
             [name]="'grupo-' + item.nome"   
             [value]="opcao"
-            [checked]="$index === 0"        
+            [checked]="opcao === selectedOption"
+            (change)="onOptionChange(opcao)"       
             class="size-5 accent-primary border-slate-300 focus:ring-primary bg-transparent"
           />
           <span class="text-slate-700 font-medium">{{ opcao }}</span>

@@ -10,7 +10,11 @@
 >
 </app-product-description>
 @for (required of productData.obrigatorios;track $index) {
-    <app-product-required-item [item]="required"></app-product-required-item>
+    <app-product-required-item 
+       [item]="required"
+       (opcaoSelecionada)="onRequiredOptionSelected($event)"
+     >
+      </app-product-required-item>
 }
 @if(productData.adicionais.length>0){
   <app-product-extras 

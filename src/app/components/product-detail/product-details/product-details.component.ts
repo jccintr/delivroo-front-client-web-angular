@@ -21,6 +21,7 @@ export class ProductDetailsComponent implements OnInit{
   quantity: number = 1;
   totalExtras: number = 0;
   extras: { nome: string; valor: number }[] = [];
+  requiredItems: { nome: string; valor: string }[] = [];
 
   constructor(private router: Router,private storeService: StoreService) {}
   
@@ -51,6 +52,16 @@ export class ProductDetailsComponent implements OnInit{
     this.extras = selectedExtras;
     console.log('Extras selecionados:', this.extras);
     // Exemplo de saída: [ { nome: 'Ovo', valor: 2 }, { nome: 'Queijo', valor: 3 } ]
+  }
+
+  onRequiredOptionSelected(selecao: { nome: string; valor: string }) {
+    // Remove seleção anterior do mesmo grupo (se existir)
+    this.requiredItems = this.requiredItems.filter(item => item.nome !== selecao.nome);
+    
+    // Adiciona a nova seleção
+    this.requiredItems.push(selecao);
+
+    console.log('Itens obrigatórios selecionados:', this.requiredItems);
   }
 
   private updateTotal() {
