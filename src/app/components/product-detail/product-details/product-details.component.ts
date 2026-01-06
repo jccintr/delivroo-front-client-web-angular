@@ -22,6 +22,7 @@ export class ProductDetailsComponent implements OnInit{
   totalExtras: number = 0;
   extras: { nome: string; valor: number }[] = [];
   requiredItems: { nome: string; valor: string }[] = [];
+  instructions: string = '';
 
   constructor(private router: Router,private storeService: StoreService) {}
   

@@ -23,7 +23,10 @@
     (selectedExtrasChange)="onSelectedExtrasChange($event)">
   </app-product-extras>
 }
-<app-product-instructions></app-product-instructions>
+<app-product-instructions
+  (instructionsChange)="instructions = $event"
+>
+</app-product-instructions>
 <app-product-add 
   [productTotal]="productTotal" 
   [quantity]="quantity"
