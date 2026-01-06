@@ -9,15 +9,20 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ProductExtraItemComponent {
 
   @Input() extra: any = {};
-  @Output() extraToggled = new EventEmitter<{ valor: number; selected: boolean }>();
+  @Output() extraToggled = new EventEmitter<{ extra: { nome: string; valor: number }; selected: boolean }>();
   isSelected: boolean = false;
 
   onCheckboxChange(event: Event) {
     const checkbox = event.target as HTMLInputElement;
     this.isSelected = checkbox.checked;
+    
     this.extraToggled.emit({
-      valor: Number(this.extra.valor),
+      extra: {
+        nome: this.extra.nome,
+        valor: Number(this.extra.valor)
+      },
       selected: this.isSelected
     });
   }
+ 
 }

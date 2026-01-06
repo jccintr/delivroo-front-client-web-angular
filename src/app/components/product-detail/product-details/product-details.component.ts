@@ -20,6 +20,8 @@ export class ProductDetailsComponent implements OnInit{
   productTotal: number = 0;
   quantity: number = 1;
   totalExtras: number = 0;
+  extras: { nome: string; valor: number }[] = [];
+
   constructor(private router: Router,private storeService: StoreService) {}
   
   ngOnInit(): void {
@@ -43,6 +45,12 @@ export class ProductDetailsComponent implements OnInit{
     this.totalExtras = newTotalExtras;
     this.updateTotal();
     
+  }
+
+  onSelectedExtrasChange(selectedExtras: { nome: string; valor: number }[]) {
+    this.extras = selectedExtras;
+    console.log('Extras selecionados:', this.extras);
+    // Exemplo de saída: [ { nome: 'Ovo', valor: 2 }, { nome: 'Queijo', valor: 3 } ]
   }
 
   private updateTotal() {
