@@ -5,7 +5,7 @@
    </div>
    <div class="bg-white  rounded-xl overflow-hidden shadow-sm border border-slate-100  divide-y divide-slate-100 ">
         @for (extra of extras;track $index) {
-            <app-product-extra-item [extra]="extra"></app-product-extra-item>
+            <app-product-extra-item [extra]="extra" (extraToggled)="onExtraToggled($event)"></app-product-extra-item>
         }
   </div>
 </div>

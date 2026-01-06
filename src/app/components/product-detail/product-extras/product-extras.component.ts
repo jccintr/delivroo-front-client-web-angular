@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductExtraItemComponent } from "../product-extra-item/product-extra-item.component";
 
 @Component({
@@ -10,4 +10,21 @@ import { ProductExtraItemComponent } from "../product-extra-item/product-extra-i
 export class ProductExtrasComponent {
 
 @Input() extras: any[] = [];
+
+@Output() totalExtrasChange = new EventEmitter<number>();
+
+private selectedExtrasTotal: number = 0;
+
+onExtraToggled(change: { valor: number; selected: boolean }) {
+    if (change.selected) {
+      this.selectedExtrasTotal += change.valor;
+    } else {
+      this.selectedExtrasTotal -= change.valor;
+    }
+
+   
+    if (this.selectedExtrasTotal < 0) this.selectedExtrasTotal = 0;
+
+    this.totalExtrasChange.emit(this.selectedExtrasTotal);
+  }
 }

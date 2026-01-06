@@ -19,6 +19,7 @@ export class ProductDetailsComponent implements OnInit{
   waitTime: string = '';
   productTotal: number = 0;
   quantity: number = 1;
+  totalExtras: number = 0;
   constructor(private router: Router,private storeService: StoreService) {}
   
   ngOnInit(): void {
@@ -31,8 +32,24 @@ export class ProductDetailsComponent implements OnInit{
   }
 
   onQuantityChange(newQuantity: number) {
+
     this.quantity = newQuantity;
-    this.productTotal = this.quantity * this.productData.preco;
+    this.updateTotal();
+   
+  }
+
+  onTotalExtrasChange(newTotalExtras: number) {
+    
+    this.totalExtras = newTotalExtras;
+    this.updateTotal();
+    
+  }
+
+  private updateTotal() {
+
+    const precoBase = Number(this.productData.preco);
+    this.productTotal = this.quantity * (precoBase + this.totalExtras);
+   
   }
 
 

@@ -13,7 +13,7 @@
     <app-product-required-item [item]="required"></app-product-required-item>
 }
 @if(productData.adicionais.length>0){
-  <app-product-extras [extras]="productData.adicionais"></app-product-extras>
+  <app-product-extras [extras]="productData.adicionais" (totalExtrasChange)="onTotalExtrasChange($event)"></app-product-extras>
 }
 <app-product-instructions></app-product-instructions>
 <app-product-add 

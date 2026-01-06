@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-extra-item',
@@ -9,4 +9,15 @@ import { Component, Input } from '@angular/core';
 export class ProductExtraItemComponent {
 
   @Input() extra: any = {};
+  @Output() extraToggled = new EventEmitter<{ valor: number; selected: boolean }>();
+  isSelected: boolean = false;
+
+  onCheckboxChange(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    this.isSelected = checkbox.checked;
+    this.extraToggled.emit({
+      valor: Number(this.extra.valor),
+      selected: this.isSelected
+    });
+  }
 }
