@@ -7,6 +7,7 @@ import { ProductRequiredItemComponent } from "../product-required-item/product-r
 import { ProductExtrasComponent } from "../product-extras/product-extras.component";
 import { ProductInstructionsComponent } from "../product-instructions/product-instructions.component";
 import { ProductAddComponent } from "../product-add/product-add.component";
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -24,7 +25,7 @@ export class ProductDetailsComponent implements OnInit{
   requiredItems: { nome: string; valor: string }[] = [];
   instructions: string = '';
 
-  constructor(private router: Router,private storeService: StoreService) {}
+  constructor(private router: Router,private storeService: StoreService, private cartService: CartService) {}
   
   ngOnInit(): void {
     const product = history.state.product;  
@@ -49,7 +50,7 @@ export class ProductDetailsComponent implements OnInit{
     
   }
 
-  onSelectedExtrasChange(selectedExtras: { nome: string; valor: number }[]) {
+   onSelectedExtrasChange(selectedExtras: { nome: string; valor: number }[]) {
     this.extras = selectedExtras;
     console.log('Extras selecionados:', this.extras);
     // Exemplo de saída: [ { nome: 'Ovo', valor: 2 }, { nome: 'Queijo', valor: 3 } ]
@@ -68,25 +69,45 @@ export class ProductDetailsComponent implements OnInit{
   onAddToCart() {
     // Monta o item completo para o carrinho
     const itemCarrinho = {
-      produto: this.productData,
+      
       quantidade: this.quantity,
-      precoTotal: this.productTotal,
-      extras: this.extras,                    // [{ nome: 'Ovo', valor: 2 }, ...]
-      obrigatórios: this.requiredItems,       // [{ nome: 'Molho', valor: 'Especial' }, ...]
-      observacoes: this.instructions.trim() || null
-    };
+      total: this.productTotal,
+      obrigatorios: this.formataObrigatorios(this.requiredItems),  
+      extras: this.formataExtras(this.extras),    
+      observacoes: this.instructions.trim() || null,
+      produto: this.productData
 
-    // Aqui você chama seu serviço para adicionar ao carrinho
-   // this.storeService.adicionarAoCarrinho(itemCarrinho);
+    };
+   console.log('Item adicionado ao carrinho:', itemCarrinho);
+   this.cartService.adicionarProduto(itemCarrinho);
+  
 
     // Opcional: feedback ao usuário (toast, navegação, etc.)
-    console.log('Item adicionado ao carrinho:', itemCarrinho);
+   
 
     // Exemplo: navegar de volta ou para o carrinho
     // this.router.navigate(['/carrinho']);
 
     // Ou mostrar uma mensagem de sucesso
     alert('Adicionado ao carrinho com sucesso!');
+  }
+
+  private formataObrigatorios(requiredItems: { nome: string; valor: string }[]): string {
+      if (!requiredItems || requiredItems.length === 0) {
+        return '';
+      }
+      return requiredItems
+        .map(item => `${item.nome} : ${item.valor}`)
+        .join(';');
+  }
+
+  private formataExtras(extras: { nome: string; valor: number }[]): string {
+      if (!extras || extras.length === 0) {
+        return '';
+      }
+      return extras
+        .map(item => `${item.nome} : ${item.valor.toFixed(2)}`)
+        .join(';');
   }
 
   private updateTotal() {
