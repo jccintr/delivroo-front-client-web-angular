@@ -65,6 +65,30 @@ export class ProductDetailsComponent implements OnInit{
     console.log('Itens obrigatórios selecionados:', this.requiredItems);
   }
 
+  onAddToCart() {
+    // Monta o item completo para o carrinho
+    const itemCarrinho = {
+      produto: this.productData,
+      quantidade: this.quantity,
+      precoTotal: this.productTotal,
+      extras: this.extras,                    // [{ nome: 'Ovo', valor: 2 }, ...]
+      obrigatórios: this.requiredItems,       // [{ nome: 'Molho', valor: 'Especial' }, ...]
+      observacoes: this.instructions.trim() || null
+    };
+
+    // Aqui você chama seu serviço para adicionar ao carrinho
+   // this.storeService.adicionarAoCarrinho(itemCarrinho);
+
+    // Opcional: feedback ao usuário (toast, navegação, etc.)
+    console.log('Item adicionado ao carrinho:', itemCarrinho);
+
+    // Exemplo: navegar de volta ou para o carrinho
+    // this.router.navigate(['/carrinho']);
+
+    // Ou mostrar uma mensagem de sucesso
+    alert('Adicionado ao carrinho com sucesso!');
+  }
+
   private updateTotal() {
 
     const precoBase = Number(this.productData.preco);

@@ -11,6 +11,7 @@ export class ProductAddComponent {
    @Input() quantity: number = 1;
    @Input() productTotal: number = 0;
    @Output() quantityChange = new EventEmitter<number>();
+   @Output() addToCart = new EventEmitter<void>();
 
    increase() {
     this.quantity++;
@@ -23,4 +24,11 @@ export class ProductAddComponent {
       this.quantityChange.emit(this.quantity);
     }
   }
+
+  onAddToCart() {
+
+    this.addToCart.emit();
+    
+  }
+
 }
