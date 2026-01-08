@@ -8,6 +8,7 @@ import { ProductExtrasComponent } from "../product-extras/product-extras.compone
 import { ProductInstructionsComponent } from "../product-instructions/product-instructions.component";
 import { ProductAddComponent } from "../product-add/product-add.component";
 import { CartService } from '../../../services/cart.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -25,7 +26,7 @@ export class ProductDetailsComponent implements OnInit{
   requiredItems: { nome: string; valor: string }[] = [];
   instructions: string = '';
 
-  constructor(private router: Router,private storeService: StoreService, private cartService: CartService) {}
+  constructor(private router: Router,private storeService: StoreService, private cartService: CartService,private location: Location) {}
   
   ngOnInit(): void {
     const product = history.state.product;  
@@ -57,24 +58,24 @@ export class ProductDetailsComponent implements OnInit{
   }
 
   onRequiredOptionSelected(selecao: { nome: string; valor: string }) {
-    // Remove seleção anterior do mesmo grupo (se existir)
+    
     this.requiredItems = this.requiredItems.filter(item => item.nome !== selecao.nome);
     
-    // Adiciona a nova seleção
+   
     this.requiredItems.push(selecao);
 
     console.log('Itens obrigatórios selecionados:', this.requiredItems);
   }
 
   onAddToCart() {
-    // Monta o item completo para o carrinho
+    
     const itemCarrinho = {
       
       quantidade: this.quantity,
       total: this.productTotal,
       obrigatorios: this.formataObrigatorios(this.requiredItems),  
-      extras: this.formataExtras(this.extras),    
-      observacoes: this.instructions.trim() || null,
+      adicionais: this.formataExtras(this.extras),    
+      observacoes: this.instructions.trim(),
       produto: this.productData
 
     };
@@ -85,11 +86,11 @@ export class ProductDetailsComponent implements OnInit{
     // Opcional: feedback ao usuário (toast, navegação, etc.)
    
 
-    // Exemplo: navegar de volta ou para o carrinho
+    // depois ir para carrinho ou tela principal
     // this.router.navigate(['/carrinho']);
-
+    this.location.back();
     // Ou mostrar uma mensagem de sucesso
-    alert('Adicionado ao carrinho com sucesso!');
+   // alert('Adicionado ao carrinho com sucesso!');
   }
 
   private formataObrigatorios(requiredItems: { nome: string; valor: string }[]): string {

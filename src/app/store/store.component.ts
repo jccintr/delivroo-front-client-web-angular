@@ -6,10 +6,11 @@ import { HeaderComponent } from "../components/header/header.component";
 import { Category, CategorySelectorComponent } from "../components/category-selector/category-selector.component";
 import { SearchComponent } from "../components/search/search.component";
 import { ProductListComponent } from "../components/product-list/product-list.component";
+import { CartStatusComponent } from "../components/cart-status/cart-status.component";
 
 @Component({
   selector: 'app-store',
-  imports: [HeaderComponent, CategorySelectorComponent, SearchComponent, ProductListComponent],
+  imports: [HeaderComponent, CategorySelectorComponent, SearchComponent, ProductListComponent, CartStatusComponent],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css'
 })
