@@ -22,11 +22,10 @@ export class CartService {
   cart$: Observable<CartItem[]> = this.cartSubject.asObservable();
 
   constructor() {
-    // O carrinho começa vazio (sem carregamento de localStorage)
     this.atualizarCarrinho();
   }
 
-  // Atualiza o subject com a cópia atual do array
+ 
   private atualizarCarrinho(): void {
     this.cartSubject.next([...this.cartItems]);
   }

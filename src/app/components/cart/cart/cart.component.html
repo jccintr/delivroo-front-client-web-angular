@@ -1,9 +1,35 @@
    <app-cart-header></app-cart-header>
    <main class="flex-1 overflow-y-auto px-4 pt-4 pb-32 no-scrollbar scroll-smooth">
        <div class="flex flex-col gap-4">
-           <app-cart-item></app-cart-item>
-           <app-cart-item></app-cart-item>
-           <app-cart-item></app-cart-item>
+             <app-cart-item 
+                *ngFor="let item of cartItems$ | async"
+                [item]="item"
+                (remove)="cartService.removerItem($event)"
+                (updateQuantity)="cartService.atualizarQuantidade($event.id, $event.quantidade)"
+             >
+             </app-cart-item>
+             <ng-container *ngIf="!(cartItems$ | async)?.length">
+                <div class="flex flex-col  min-h-[60vh] items-center justify-center">
+                   <span class="text-slate-500 text-lg font-medium">
+                      Seu carrinho está vazio 😔
+                   </span>
+                   <button 
+                    (click)="back()"
+                     class="mt-8 bg-primary hover:bg-primary/90 text-white rounded-xl h-12 md:h-14 flex items-center justify-between px-6 font-bold text-base md:text-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-all">
+                      Adicione Itens
+                   </button>
+                </div>
+             </ng-container>
+       </div>
+       <div class="my-6 px-2">
+          <div class="h-px w-full bg-slate-200"></div>
+       </div>
+       <app-cart-total></app-cart-total>
+       <div class="absolute bottom-0 left-0 w-full p-4 bg-surface-light/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-100 dark:border-white/5 z-30">
+          <button class="w-full bg-primary hover:bg-[#d63d0b] text-white font-bold text-[17px] py-4 rounded-xl shadow-lg shadow-primary/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group">
+             <span>Prosseguir para Checkout</span>
+             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </button>
        </div>
    </main>
 

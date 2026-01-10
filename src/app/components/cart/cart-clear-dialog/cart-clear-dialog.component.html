@@ -1,0 +1,36 @@
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+         (click)="fechar()">
+      
+      <!-- Modal -->
+      <div class="bg-surface-light rounded-2xl p-6 w-full max-w-md shadow-2xl border border-slate-100 
+                   transform scale-100 animate-in fade-in zoom-in duration-200"
+           (click)="$event.stopPropagation()">
+        
+        <!-- Header -->
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-3xl opacity-60">🛒</span>
+          <h2 class="text-xl font-bold text-slate-900">Limpar Carrinho?</h2>
+        </div>
+
+        <!-- Mensagem -->
+        <p class="text-slate-600 mb-8 leading-relaxed text-center">
+          Todos os itens do seu carrinho serão removidos. 
+          <strong class="text-slate-900">Esta ação não pode ser desfeita.</strong>
+        </p>
+
+        <!-- Botões -->
+        <div class="flex gap-3 justify-end pt-4">
+          <button (click)="fechar()" 
+                  class="px-6 py-2.5 text-slate-600 font-medium rounded-xl 
+                         hover:bg-slate-100 transition-all border border-slate-200">
+            Cancelar
+          </button>
+          <button (click)="confirmar()" 
+                  class="px-6 py-2.5 bg-red-500 text-white font-medium rounded-xl 
+                         shadow-sm hover:shadow-md hover:bg-red-600 
+                         transition-all active:scale-95">
+            Limpar Carrinho
+          </button>
+        </div>
+      </div>
+    </div>
