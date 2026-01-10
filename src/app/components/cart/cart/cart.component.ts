@@ -6,10 +6,12 @@ import { CartTotalComponent } from "../cart-total/cart-total.component";
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
+import { CartCheckoutComponent } from "../cart-checkout/cart-checkout.component";
+import { CartEmptyComponent } from "../cart-empty/cart-empty.component";
 
 @Component({
   selector: 'app-cart',
-  imports: [CartHeaderComponent, CartItemComponent, CartTotalComponent,CommonModule],
+  imports: [CartHeaderComponent, CartItemComponent, CartTotalComponent, CommonModule, CartCheckoutComponent, CartEmptyComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
