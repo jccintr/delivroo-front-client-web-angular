@@ -3,15 +3,13 @@
       <button (click)="back()" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-full hover:bg-gray-100  transition-colors group">
          <span class="material-symbols-outlined text-slate-900 group-hover:scale-110 transition-transform">arrow_back</span>
       </button>
-      <h2 class="text-lg font-bold leading-tight tracking-tight text-primary ">Seu Carrinho</h2>
+      <h2 class="text-lg font-bold leading-tight tracking-tight text-primary ">Sua Sacola</h2>
    </div>
    @if(hasItems()){
       <button (click)="abrirDialogLimpar()" class="text-sm font-bold text-red-500 hover:text-red-600 transition-colors px-2 py-1 rounded hover:bg-red-50 ">
-         Limpar
+         Esvaziar
       </button>
-   } @else {
-    <p class="text-white">Limpar</p>
-   }
+   } 
    @if (mostrarDialogLimpar) {
       <app-cart-clear-dialog 
          (confirmado)="onConfirmarLimpar()"
