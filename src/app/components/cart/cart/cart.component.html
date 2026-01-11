@@ -1,7 +1,8 @@
    
    <app-cart-header></app-cart-header>
    <main class="flex-1 overflow-y-auto px-4 pt-4 pb-4 no-scrollbar scroll-smooth">
-       <div *ngIf="(cartItems$ | async)?.length" class="flex flex-col gap-4 md:grid grid-cols-2 px-4 lg:grid-cols-3">
+
+       <div *ngIf="(cartItems$ | async)?.length" class="flex flex-col gap-4 md:grid grid-cols-2  lg:grid-cols-3">
              <app-cart-item 
                 *ngFor="let item of cartItems$ | async"
                 [item]="item"
@@ -9,8 +10,8 @@
                 (updateQuantity)="cartService.atualizarQuantidade($event.id, $event.quantidade)"
              >
              </app-cart-item>
-             
        </div>
+
        <div *ngIf="!(cartItems$ | async)?.length" class="flex flex-col items-center justify-center text-center">
                 <app-cart-empty></app-cart-empty>
        </div>
