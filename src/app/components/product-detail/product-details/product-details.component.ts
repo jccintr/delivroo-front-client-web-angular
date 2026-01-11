@@ -75,22 +75,15 @@ export class ProductDetailsComponent implements OnInit{
       total: this.productTotal,
       obrigatorios: this.formataObrigatorios(this.requiredItems),  
       adicionais: this.formataExtras(this.extras),    
-      observacoes: this.instructions.trim(),
+      observacao: this.instructions.trim(),
       produto: this.productData
 
     };
    console.log('Item adicionado ao carrinho:', itemCarrinho);
    this.cartService.adicionarProduto(itemCarrinho);
-  
-
-    // Opcional: feedback ao usuário (toast, navegação, etc.)
-   
-
-    // depois ir para carrinho ou tela principal
-    // this.router.navigate(['/carrinho']);
+    // this.router.navigate(['/cart']);
     this.location.back();
-    // Ou mostrar uma mensagem de sucesso
-   // alert('Adicionado ao carrinho com sucesso!');
+    // mostrar um toast 
   }
 
   private formataObrigatorios(requiredItems: { nome: string; valor: string }[]): string {

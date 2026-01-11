@@ -49,17 +49,7 @@ export class CartService {
   
   }
 
-  /*
-  adicionarItem(item: Omit<CartItem, 'id'>): void {
-    const novoItem: CartItem = {
-      ...item,
-      id: this.createUniqueId()
-    };
-    this.cartItems.push(novoItem);
-    this.atualizarCarrinho();
-  }
-*/
-  // Remove um item pelo ID
+ 
   removerItem(id: number): void {
     this.cartItems = this.cartItems.filter(item => item.id !== id);
     this.atualizarCarrinho();
