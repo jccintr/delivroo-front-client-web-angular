@@ -13,8 +13,10 @@
        </div>
        <div *ngIf="!(cartItems$ | async)?.length" class="flex flex-col items-center justify-center text-center">
                 <app-cart-empty></app-cart-empty>
-             </div>
+       </div>
        <app-cart-total></app-cart-total>
-       <app-cart-checkout></app-cart-checkout>
+       <div *ngIf="(cartItems$ | async)?.length">
+         <app-cart-checkout></app-cart-checkout>
+       </div>
    </main>
    

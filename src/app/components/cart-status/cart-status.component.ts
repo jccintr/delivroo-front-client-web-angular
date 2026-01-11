@@ -16,7 +16,7 @@ export class CartStatusComponent {
   valorTotal = computed(() => this.cartService.getValorTotal());
 
   mostrarCarrinho() {
-    this.router.navigate(['/cart']); // ajuste a rota conforme sua aplicação
+    this.router.navigate(['/cart']); 
   }
 
   get showCartButton(): boolean {
