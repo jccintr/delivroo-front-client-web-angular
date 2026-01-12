@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-checkout-customer',
-  imports: [],
+  imports: [NgxMaskDirective],
+  providers: [provideNgxMask()],
   templateUrl: './checkout-customer.component.html',
   styleUrl: './checkout-customer.component.css'
 })
