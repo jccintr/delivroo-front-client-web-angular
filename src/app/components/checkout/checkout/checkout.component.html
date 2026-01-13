@@ -4,4 +4,20 @@
        (setName)="name.set($event)"
        (setPhone)="phone.set($event)">
     </app-checkout-customer>
+    <app-h-spacer></app-h-spacer>
+    <app-checkout-delivery
+       [delivery]="delivery()"
+       (setDelivery)="onSetDelivery($event)"
+       (setAddres)="address.set($event)"
+    >
+    </app-checkout-delivery>
+    <app-h-spacer></app-h-spacer>
+    <app-checkout-payment></app-checkout-payment>
+    <app-h-spacer></app-h-spacer>
+    <app-checkout-instructions
+       (setInstructions)="instructions.set($event)"
+    >
+    </app-checkout-instructions>
+    <app-h-spacer></app-h-spacer>
+    <app-checkout-summary></app-checkout-summary>
 </main>
