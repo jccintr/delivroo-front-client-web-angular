@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Payment } from '../../../services/payment.service';
+
 
 @Component({
   selector: 'app-checkout-payment',
@@ -7,5 +9,6 @@ import { Component } from '@angular/core';
   styleUrl: './checkout-payment.component.css'
 })
 export class CheckoutPaymentComponent {
-
+   
+   payments = input<Payment[]>([]);
 }

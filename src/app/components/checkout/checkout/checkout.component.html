@@ -12,7 +12,7 @@
     >
     </app-checkout-delivery>
     <app-h-spacer></app-h-spacer>
-    <app-checkout-payment></app-checkout-payment>
+    <app-checkout-payment [payments]="payments()"></app-checkout-payment>
     <app-h-spacer></app-h-spacer>
     <app-checkout-instructions
        (setInstructions)="instructions.set($event)"

@@ -7,6 +7,7 @@ import { Category, CategorySelectorComponent } from "../components/category-sele
 import { SearchComponent } from "../components/search/search.component";
 import { ProductListComponent } from "../components/product-list/product-list.component";
 import { CartStatusComponent } from "../components/cart-status/cart-status.component";
+import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-store',
@@ -25,7 +26,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   selectedCategoryId: number = 1;
    private subscription: Subscription = new Subscription();
   
-  constructor(private route: ActivatedRoute, private storeService: StoreService,private router: Router) {
+  constructor(private route: ActivatedRoute, private storeService: StoreService,private router: Router,private paymentService: PaymentService) {
     
     effect(() => {
       const termo = this.searchTerm().toLowerCase();
@@ -49,6 +50,8 @@ export class StoreComponent implements OnInit, OnDestroy {
           isOpen: this.store.aberto
         }
        
+       
+        this.paymentService.setPayments(response.pagamentos);
         this.categories = response.categorias;
         if (this.categories.length > 0) {
             this.selectedCategoryId = this.categories[0].id;

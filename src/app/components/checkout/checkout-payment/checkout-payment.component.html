@@ -1,4 +1,6 @@
 <div class="p-4 bg-surface-light rounded-md shadow-gray-300 shadow">
    <h3 class="text-text-maintext-lg font-bold mb-4">Forma de Pagamento</h3>
-   
+   @for (payment of payments(); track payment.id){
+     <p>{{payment.nome}}</p>
+   }
 </div>
