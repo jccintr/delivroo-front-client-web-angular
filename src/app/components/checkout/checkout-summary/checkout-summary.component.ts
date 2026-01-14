@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CartItem } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-checkout-summary',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './checkout-summary.component.css'
 })
 export class CheckoutSummaryComponent {
+
+  @Input() items!: CartItem[] | null;
 
 }

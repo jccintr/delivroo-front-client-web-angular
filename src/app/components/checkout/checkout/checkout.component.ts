@@ -7,15 +7,20 @@ import { CheckoutPaymentComponent } from "../checkout-payment/checkout-payment.c
 import { CheckoutInstructionsComponent } from "../checkout-instructions/checkout-instructions.component";
 import { CheckoutSummaryComponent } from "../checkout-summary/checkout-summary.component";
 import { Payment, PaymentService } from '../../../services/payment.service';
+import { Observable } from 'rxjs';
+import { CartItem, CartService } from '../../../services/cart.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
-  imports: [CheckoutHeaderComponent, CheckoutCustomerComponent, CheckoutDeliveryComponent, HSpacerComponent, CheckoutPaymentComponent, CheckoutInstructionsComponent, CheckoutSummaryComponent],
+  imports: [CommonModule,CheckoutHeaderComponent, CheckoutCustomerComponent, CheckoutDeliveryComponent, HSpacerComponent, CheckoutPaymentComponent, CheckoutInstructionsComponent, CheckoutSummaryComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
+  cartItems$!: Observable<CartItem[]>;
   private paymentService = inject(PaymentService);
+ 
   name = signal('');
   phone = signal('');
   delivery = signal(true);
@@ -25,6 +30,9 @@ export class CheckoutComponent {
 
   selectedPayment = signal<Payment | null>(null);
 
+  constructor(public cartService: CartService,) {
+    this.cartItems$ = this.cartService.cart$;
+  }
 
   onSetDelivery(value: boolean) {
     this.delivery.set(value);

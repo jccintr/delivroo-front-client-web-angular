@@ -23,5 +23,5 @@
     >
     </app-checkout-instructions>
     <app-h-spacer></app-h-spacer>
-    <app-checkout-summary></app-checkout-summary>
+    <app-checkout-summary [items]="cartItems$ | async"></app-checkout-summary>
 </main>
