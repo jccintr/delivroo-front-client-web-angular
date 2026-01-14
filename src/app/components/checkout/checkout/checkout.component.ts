@@ -10,10 +10,11 @@ import { Payment, PaymentService } from '../../../services/payment.service';
 import { Observable } from 'rxjs';
 import { CartItem, CartService } from '../../../services/cart.service';
 import { CommonModule } from '@angular/common';
+import { CheckoutDeliveryFeeComponent } from "../checkout-delivery-fee/checkout-delivery-fee.component";
 
 @Component({
   selector: 'app-checkout',
-  imports: [CommonModule,CheckoutHeaderComponent, CheckoutCustomerComponent, CheckoutDeliveryComponent, HSpacerComponent, CheckoutPaymentComponent, CheckoutInstructionsComponent, CheckoutSummaryComponent],
+  imports: [CommonModule, CheckoutHeaderComponent, CheckoutCustomerComponent, CheckoutDeliveryComponent, HSpacerComponent, CheckoutPaymentComponent, CheckoutInstructionsComponent, CheckoutSummaryComponent, CheckoutDeliveryFeeComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
