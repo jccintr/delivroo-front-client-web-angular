@@ -6,7 +6,7 @@ import { HSpacerComponent } from "../../h-spacer/h-spacer.component";
 import { CheckoutPaymentComponent } from "../checkout-payment/checkout-payment.component";
 import { CheckoutInstructionsComponent } from "../checkout-instructions/checkout-instructions.component";
 import { CheckoutSummaryComponent } from "../checkout-summary/checkout-summary.component";
-import { PaymentService } from '../../../services/payment.service';
+import { Payment, PaymentService } from '../../../services/payment.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,8 +22,18 @@ export class CheckoutComponent {
   address = signal('');
   instructions = signal('');
   payments = this.paymentService.payments;
+
+  selectedPayment = signal<Payment | null>(null);
+
+
   onSetDelivery(value: boolean) {
     this.delivery.set(value);
+  }
+
+  onPaymentSelected(payment: Payment) {
+    this.selectedPayment.set(payment);
+    console.log('Forma de pagamento selecionada:', payment);
+    // Aqui você pode disparar validações, atualizar summary, etc.
   }
 
 }
