@@ -5,7 +5,7 @@ export interface Fee {
   id: number;
   user_id: number;
   bairro: string;
-  valor:number;
+  valor: string;
   ativo: boolean;
 }
 

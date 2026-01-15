@@ -8,7 +8,7 @@
             <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{product.descricao}}</p>
          </div>
          <div class="flex items-center justify-between mt-2">
-            <span class="font-bold text-primary">R$ {{product.preco}}</span>
+            <span class="font-bold text-primary">R$ {{product.preco.replace('.', ',')}}</span>
          </div>
        </div>
        <div class="relative shrink-0 w-28 h-28">

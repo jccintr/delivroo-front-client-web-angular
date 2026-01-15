@@ -6,7 +6,6 @@
       type="button"
       (click)="selectDeliveryType(true)"
       [class.bg-white]="delivery"
-      
       [class.shadow-sm]="delivery"
       [class.font-bold]="delivery"
       [class.text-primary]="delivery"
@@ -21,7 +20,6 @@
       type="button"
       (click)="selectDeliveryType(false)"
       [class.bg-white]="!delivery"
-     
       [class.shadow-sm]="!delivery"
       [class.font-bold]="!delivery"
       [class.text-primary]="!delivery"
@@ -66,7 +64,7 @@
                     [value]="fee.id"
                     [selected]="_selected()?.id === fee.id"
                   >
-                    {{fee.bairro}} - R$ {{fee.valor}}
+                    {{fee.bairro}} - R$ {{fee.valor.replace('.', ',')}}
                   </option>
                }
             </select>

@@ -6,7 +6,7 @@
     <div class="flex justify-between items-center pt-1">
        <span class="text-lg font-bold text-slate-900 ">Total</span>
        <div class="text-right">
-           <span class="text-xl font-bold text-primary  tabular-nums">R$ {{ cartService.getValorTotal().toFixed(2) }}</span>
+           <span class="text-xl font-bold text-primary  tabular-nums">R$ {{ cartService.getValorTotal().toFixed(2).replace('.', ',') }}</span>
        </div>
     </div>
 </div>
