@@ -2,13 +2,15 @@
    <h3 class="text-text-maintext-lg font-bold mb-4">Resumo do Pedido</h3>
    <div class="bg-gray-50 rounded-xl p-4 space-y-3">
       @for (item of items; track item.id) {
-         <div class="flex justify-between items-start gap-3">
+
+         <div class="flex justify-between items-center gap-3">
             <div class="bg-gray-200  w-6 h-6 rounded flex items-center justify-center text-xs font-bold text-text-secondary">{{item.quantidade}}x</div>
-               <div class="flex-1">
-                     <p class="text-sm font-medium text-text-main ">{{item.produto.nome}}</p>
-               </div>
-               <p class="text-sm font-semibold text-primary ">R$ {{item.total.toFixed(2)}}</p>
+            <div class="flex-1">
+               <p class="text-sm font-medium text-text-main ">{{item.produto.nome}}</p>
+            </div>
+            <p class="text-sm font-semibold text-primary ">R$ {{item.total.toFixed(2)}}</p>
          </div>
+
       }
    </div>
  </div>

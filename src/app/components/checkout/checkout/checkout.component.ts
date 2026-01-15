@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CheckoutHeaderComponent } from "../checkout-header/checkout-header.component";
 import { CheckoutCustomerComponent } from "../checkout-customer/checkout-customer.component";
 import { CheckoutDeliveryComponent } from "../checkout-delivery/checkout-delivery.component";
@@ -10,17 +10,27 @@ import { Payment, PaymentService } from '../../../services/payment.service';
 import { Observable } from 'rxjs';
 import { CartItem, CartService } from '../../../services/cart.service';
 import { CommonModule } from '@angular/common';
-import { CheckoutDeliveryFeeComponent } from "../checkout-delivery-fee/checkout-delivery-fee.component";
+import { Fee, FeeService } from '../../../services/fee.service';
 
 @Component({
   selector: 'app-checkout',
-  imports: [CommonModule, CheckoutHeaderComponent, CheckoutCustomerComponent, CheckoutDeliveryComponent, HSpacerComponent, CheckoutPaymentComponent, CheckoutInstructionsComponent, CheckoutSummaryComponent, CheckoutDeliveryFeeComponent],
+  imports: [
+    CommonModule, 
+    CheckoutHeaderComponent, 
+    CheckoutCustomerComponent, 
+    CheckoutDeliveryComponent, 
+    HSpacerComponent, 
+    CheckoutPaymentComponent, 
+    CheckoutInstructionsComponent, 
+    CheckoutSummaryComponent
+  ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
   cartItems$!: Observable<CartItem[]>;
   private paymentService = inject(PaymentService);
+  private feeService = inject(FeeService);
  
   name = signal('');
   phone = signal('');
@@ -28,21 +38,30 @@ export class CheckoutComponent {
   address = signal('');
   instructions = signal('');
   payments = this.paymentService.payments;
+  fees = this.feeService.fees;
 
   selectedPayment = signal<Payment | null>(null);
+  selectedFee = signal<Fee | null>(null);
 
   constructor(public cartService: CartService,) {
     this.cartItems$ = this.cartService.cart$;
   }
+  
 
   onSetDelivery(value: boolean) {
-    this.delivery.set(value);
+     this.delivery.set(value);
   }
 
   onPaymentSelected(payment: Payment) {
     this.selectedPayment.set(payment);
     console.log('Forma de pagamento selecionada:', payment);
-    // Aqui você pode disparar validações, atualizar summary, etc.
+  }
+
+  onFeeSelected(fee: Fee) {
+
+    this.selectedFee.set(fee);
+    console.log('Bairro selecionado:', fee);
+   
   }
 
 }

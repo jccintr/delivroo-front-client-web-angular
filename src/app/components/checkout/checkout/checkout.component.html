@@ -9,10 +9,11 @@
        [delivery]="delivery()"
        (setDelivery)="onSetDelivery($event)"
        (setAddres)="address.set($event)"
+       [fees]="fees()"
+       (feeSelected)="onFeeSelected($event)"
     >
     </app-checkout-delivery>
-    <app-h-spacer></app-h-spacer>
-    <app-checkout-delivery-fee></app-checkout-delivery-fee>
+    
     <app-h-spacer></app-h-spacer>
     <app-checkout-payment 
        [payments]="payments()"

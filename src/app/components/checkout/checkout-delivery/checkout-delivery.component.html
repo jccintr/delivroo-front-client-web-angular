@@ -52,4 +52,27 @@
       </div>
     </div>
   }
+   @if (delivery) {
+    <div class="space-y-4 animate-fade-in">
+      <div class="flex gap-3 items-start">
+        <div class="flex-1">
+          <label class="block mb-3">
+            <span class="text-sm font-medium text-text-main  mb-1.5 block">
+              Bairros Atendidos
+            </span>
+            <select class="w-full p-4 text-slate-700 font-medium rounded-lg border-2 border-gray-200  bg-gray-50 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary">
+               @for (fee of fees(); track fee.id) {
+                  <option
+                    [value]="fee.id"
+                    [selected]="_selected()?.id === fee.id"
+                  >
+                    {{fee.bairro}} - R$ {{fee.valor}}
+                  </option>
+               }
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+  }
 </div>
