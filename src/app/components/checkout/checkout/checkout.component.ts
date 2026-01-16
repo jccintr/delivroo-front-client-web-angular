@@ -11,19 +11,21 @@ import { Observable } from 'rxjs';
 import { CartItem, CartService } from '../../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { Fee, FeeService } from '../../../services/fee.service';
+import { FinalizeOrderComponent } from "../finalize-order/finalize-order.component";
 
 @Component({
   selector: 'app-checkout',
   imports: [
-    CommonModule, 
-    CheckoutHeaderComponent, 
-    CheckoutCustomerComponent, 
-    CheckoutDeliveryComponent, 
-    HSpacerComponent, 
-    CheckoutPaymentComponent, 
-    CheckoutInstructionsComponent, 
-    CheckoutSummaryComponent
-  ],
+    CommonModule,
+    CheckoutHeaderComponent,
+    CheckoutCustomerComponent,
+    CheckoutDeliveryComponent,
+    HSpacerComponent,
+    CheckoutPaymentComponent,
+    CheckoutInstructionsComponent,
+    CheckoutSummaryComponent,
+    FinalizeOrderComponent
+],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })

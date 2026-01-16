@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Input, output, Output, signal } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnInit, output, Output, signal } from '@angular/core';
 import { Fee } from '../../../services/fee.service';
 
 @Component({
@@ -7,7 +7,11 @@ import { Fee } from '../../../services/fee.service';
   templateUrl: './checkout-delivery.component.html',
   styleUrl: './checkout-delivery.component.css'
 })
-export class CheckoutDeliveryComponent {
+export class CheckoutDeliveryComponent implements OnInit {
+
+  ngOnInit() {
+    this.emitInitialFeeIfPossible();
+  }
 
    @Input() delivery!: boolean;
    fees = input<Fee[]>([]);
@@ -26,21 +30,31 @@ export class CheckoutDeliveryComponent {
     this.setDelivery.emit(isDelivery);   
    }
 
-    onFeeChange(event: Event) {
-  const select = event.target as HTMLSelectElement;
-  const selectedId = Number(select.value);
-  const fee = this.fees().find(f => f.id === selectedId);
+  onFeeChange(event: Event) {
+      const select = event.target as HTMLSelectElement;
+      const selectedId = Number(select.value);
+      const fee = this.fees().find(f => f.id === selectedId);
 
-  if (fee) {
-    this._selected.set(fee);
-    this.feeSelected.emit(fee);          // ← aqui está emitindo Fee
-  }
-}
+      if (fee) {
+        this._selected.set(fee);
+        this.feeSelected.emit(fee);          // ← aqui está emitindo Fee
+      }
+ }
 
   private emitSelection() {
     const selected = this._selected();
     if (selected) {
       this.feeSelected.emit(selected);
+    }
+  }
+
+  private emitInitialFeeIfPossible() {
+    // Só executa se houver itens e ainda não houver seleção
+    if (this.fees().length > 0 && !this._selected()) {
+      const firstFee = this.fees()[0];
+      this._selected.set(firstFee);
+      this.feeSelected.emit(firstFee);
+      // Opcional: console.log('Fee inicial selecionado automaticamente:', firstFee);
     }
   }
 

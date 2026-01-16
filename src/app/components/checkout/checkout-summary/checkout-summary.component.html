@@ -13,4 +13,22 @@
 
       }
    </div>
+   
+   <div class="mt-4 mx-2 space-y-2">
+       @if (delivery) {
+         <div class="flex justify-between text-sm text-text-secondary">
+            <span>Produtos</span>
+            <span>R$ {{this.cartService.getValorTotal().toFixed(2).replace('.', ',')}}</span>
+         </div>
+         <div class="flex justify-between text-sm text-text-secondary">
+            <span>Taxa de entrega</span>
+            <span>R$ {{(selectedFee?.valor ?? '0').replace('.', ',')}}</span>
+         </div>
+      }
+      <div class="border-t border-dashed border-gray-300  my-2 pt-2 flex justify-between items-center">
+         <span class="text-base font-bold text-text-main ">Total</span>
+         <span class="font-semibold text-primary">R$ {{getTotalPedido().toFixed(2).replace('.', ',')}}</span>
+      </div>
+   </div>
+ 
  </div>

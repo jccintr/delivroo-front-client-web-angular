@@ -15,16 +15,31 @@
     </app-checkout-delivery>
     
     <app-h-spacer></app-h-spacer>
+
     <app-checkout-payment 
        [payments]="payments()"
        (paymentSelected)="onPaymentSelected($event)"
      >
      </app-checkout-payment>
+
     <app-h-spacer></app-h-spacer>
-    <app-checkout-instructions
+
+    <app-checkout-summary 
+      [delivery]="delivery()"
+      [selectedFee]="selectedFee()"
+      [items]="cartItems$ | async">
+   </app-checkout-summary>
+
+     <app-h-spacer></app-h-spacer>
+
+     <app-checkout-instructions
        (setInstructions)="instructions.set($event)"
-    >
-    </app-checkout-instructions>
-    <app-h-spacer></app-h-spacer>
-    <app-checkout-summary [items]="cartItems$ | async"></app-checkout-summary>
+     >
+     </app-checkout-instructions>
+     
 </main>
+<app-finalize-order
+  [delivery]="delivery()"
+  [selectedFee]="selectedFee()"
+ ></app-finalize-order>
+

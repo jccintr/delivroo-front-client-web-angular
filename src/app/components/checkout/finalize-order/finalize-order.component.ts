@@ -1,16 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { CartItem, CartService } from '../../../services/cart.service';
+import { CartService } from '../../../services/cart.service';
 import { Fee } from '../../../services/fee.service';
 
 @Component({
-  selector: 'app-checkout-summary',
+  selector: 'app-finalize-order',
   imports: [],
-  templateUrl: './checkout-summary.component.html',
-  styleUrl: './checkout-summary.component.css'
+  templateUrl: './finalize-order.component.html',
+  styleUrl: './finalize-order.component.css'
 })
-export class CheckoutSummaryComponent {
+export class FinalizeOrderComponent {
 
-  @Input() items!: CartItem[] | null;
   @Input() delivery!: boolean;
   @Input() selectedFee: Fee | null = null;
 
@@ -21,6 +20,5 @@ export class CheckoutSummaryComponent {
   getTotalPedido(): number {
     return this.delivery ? Number(this.selectedFee?.valor) + this.cartService.getValorTotal() : this.cartService.getValorTotal();
   }
-
 
 }

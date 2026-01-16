@@ -1,9 +1,7 @@
 <div class="p-4 bg-surface-light rounded-md shadow-gray-300 shadow">
   <div class="flex justify-between items-center mb-4">
     <h3 class="text-text-main text-lg font-bold">Forma de Pagamento</h3>
-    <span class="px-2 py-1 rounded bg-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider">
-      Obrigatório
-    </span>
+    
   </div>
 
   @if (payments().length === 0) {
@@ -24,9 +22,6 @@
             />
             <span class="text-slate-700 font-medium">{{ payment.nome }}</span>
           </div>
-
-          <!-- Opcional: mostrar ícone, bandeira ou descrição extra -->
-          <!-- <span class="text-slate-500 text-sm">{{ payment.descricao || '' }}</span> -->
         </label>
       }
     </div>

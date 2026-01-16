@@ -19,7 +19,7 @@
         <div class="flex justify-between items-end mt-3">
             <p class="text-base font-bold text-primary ">R$ {{ item.total.toFixed(2).replace('.', ',') }}</p>
             <div class="flex items-center gap-3 bg-background-light  rounded-lg px-2 py-1 border border-gray-100">
-                <button (click)="decrementar()" class="flex items-center justify-center w-6 h-6 rounded bg-white  shadow-sm text-slate-600  hover:text-primary transition-colors active:scale-95">
+                <button (click)="decrementar()" [disabled]="item.quantidade <= 1" class="flex items-center justify-center w-6 h-6 rounded bg-white  shadow-sm text-slate-600  hover:text-primary transition-colors active:scale-95">
                     <span class="material-symbols-outlined text-[16px] font-bold">remove</span>
                 </button>
                 <span class="text-sm font-bold w-3 text-center tabular-nums">{{ item.quantidade }}</span>
