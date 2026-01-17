@@ -12,6 +12,7 @@ import { CartItem, CartService } from '../../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { Fee, FeeService } from '../../../services/fee.service';
 import { FinalizeOrderComponent } from "../finalize-order/finalize-order.component";
+import { AlertDialogComponent } from "../../alert-dialog/alert-dialog.component";
 
 @Component({
   selector: 'app-checkout',
@@ -24,7 +25,8 @@ import { FinalizeOrderComponent } from "../finalize-order/finalize-order.compone
     CheckoutPaymentComponent,
     CheckoutInstructionsComponent,
     CheckoutSummaryComponent,
-    FinalizeOrderComponent
+    FinalizeOrderComponent,
+    AlertDialogComponent
 ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
@@ -41,6 +43,11 @@ export class CheckoutComponent {
   instructions = signal('');
   payments = this.paymentService.payments;
   fees = this.feeService.fees;
+
+  showAlertDialog = false
+
+  showValidationError = signal(false);
+  validationErrorMessage = signal('');
 
   selectedPayment = signal<Payment | null>(null);
   selectedFee = signal<Fee | null>(null);
@@ -67,19 +74,43 @@ export class CheckoutComponent {
   }
 
   sendOrder() {
-  console.log('Pedido sendo enviado...');
-  console.log('Dados do pedido:', {
-    name: this.name(),
-    phone: this.phone(),
-    delivery: this.delivery(),
-    address: this.address(),
-    instructions: this.instructions(),
-    payment: this.selectedPayment(),
-    fee: this.selectedFee(),
-   
-  });
 
-  // Aqui você implementará depois a lógica real de envio (API, etc)
+    if(!this.name().trim()) {
+      this.validationErrorMessage.set('Por favor, informe o seu nome.');
+      this.showAlertDialog = true;
+      return;
+    }
+
+    if(!this.phone().trim()) {
+      this.validationErrorMessage.set('Por favor, informe o seu número de telefone.');
+      this.showAlertDialog = true;
+      return;
+    }
+
+    if(this.delivery() && !this.address().trim()) {
+      this.validationErrorMessage.set('Por favor, informe o endereço de entrega.');
+      this.showAlertDialog = true;
+      return;
+    }
+
+    console.log('Pedido sendo enviado...');
+    console.log('Dados do pedido:', {
+      name: this.name(),
+      phone: this.phone(),
+      delivery: this.delivery(),
+      address: this.address(),
+      instructions: this.instructions(),
+      payment: this.selectedPayment(),
+      fee: this.selectedFee(),
+   
+     });
+     this.validationErrorMessage.set('Pedido Enviado !');
+     this.showAlertDialog = true;
+    // Aqui você implementará depois a lógica real de envio (API, etc)
+}
+
+closeAlertDialog(){
+  this.showAlertDialog = false;
 }
 
 }

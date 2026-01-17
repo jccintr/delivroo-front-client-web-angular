@@ -38,6 +38,12 @@
      </app-checkout-instructions>
      
 </main>
+@if (showAlertDialog) {
+<app-alert-dialog
+        [message]="validationErrorMessage()"
+        (closed)="closeAlertDialog()">
+</app-alert-dialog>
+}
 <app-finalize-order
   [delivery]="delivery()"
   [selectedFee]="selectedFee()"

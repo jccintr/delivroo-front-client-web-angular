@@ -1,1 +1,30 @@
-<p>alert-dialog works!</p>
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+     (click)="fechar()">
+
+  <!-- Modal -->
+  <div class="bg-surface-light rounded-2xl p-6 w-full max-w-md shadow-2xl border border-slate-100 
+               transform scale-100 animate-in fade-in zoom-in duration-200"
+       (click)="$event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-6">
+      <h2 class="text-xl font-bold text-slate-900">Atenção</h2>
+    </div>
+
+    <!-- Mensagem -->
+    <p class="text-slate-700 mb-8 leading-relaxed text-center">
+      {{ message }}
+    </p>
+
+    <!-- Botão único -->
+    <div class="flex justify-end pt-4">
+      <button (click)="fechar()"
+              class="px-8 py-3 bg-primary text-white font-medium rounded-xl 
+                     shadow-md hover:shadow-lg hover:bg-[#d63d0b] 
+                     transition-all active:scale-95">
+        OK
+      </button>
+    </div>
+
+  </div>
+</div>
