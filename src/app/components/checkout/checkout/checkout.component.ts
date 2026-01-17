@@ -66,4 +66,20 @@ export class CheckoutComponent {
    
   }
 
+  sendOrder() {
+  console.log('Pedido sendo enviado...');
+  console.log('Dados do pedido:', {
+    name: this.name(),
+    phone: this.phone(),
+    delivery: this.delivery(),
+    address: this.address(),
+    instructions: this.instructions(),
+    payment: this.selectedPayment(),
+    fee: this.selectedFee(),
+   
+  });
+
+  // Aqui você implementará depois a lógica real de envio (API, etc)
+}
+
 }

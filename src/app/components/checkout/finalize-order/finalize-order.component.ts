@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
 import { Fee } from '../../../services/fee.service';
 
@@ -12,6 +12,7 @@ export class FinalizeOrderComponent {
 
   @Input() delivery!: boolean;
   @Input() selectedFee: Fee | null = null;
+  @Output() confirmOrder = new EventEmitter<void>();
 
   constructor(public cartService: CartService) {
       
@@ -19,6 +20,10 @@ export class FinalizeOrderComponent {
 
   getTotalPedido(): number {
     return this.delivery ? Number(this.selectedFee?.valor) + this.cartService.getValorTotal() : this.cartService.getValorTotal();
+  }
+
+  onConfirm() {
+    this.confirmOrder.emit();   // emite o evento para o componente pai
   }
 
 }
