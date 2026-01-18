@@ -4,14 +4,14 @@
       <label class="block">
          <span class="text-sm font-medium text-text-main mb-1.5 block">Nome</span>
          <div class="relative">
-            <input (input)="onChangeNameInput($event)" class="w-full h-12 rounded-lg border-2 border-gray-200  bg-gray-50  text-text-main  px-4  transition-all placeholder:text-text-secondary/60" placeholder="Ex: João Silva" type="text"/>
+            <input [value]="nameInputValue()" (input)="onChangeNameInput($event)" class="w-full h-12 rounded-lg border-2 border-gray-200  bg-gray-50  text-text-main  px-4  transition-all placeholder:text-text-secondary/60" placeholder="Ex: João Silva" type="text"/>
             <span class="material-symbols-outlined absolute right-3 top-3 text-gray-400">person</span>
          </div>
       </label>
       <label class="block">
          <span class="text-sm font-medium text-text-main  mb-1.5 block">Telefone</span>
             <div class="relative">
-               <input (input)="onChangePhoneInput($event)" mask="(00) 00000-0000" [dropSpecialCharacters]="true" [showMaskTyped]="true" class="w-full h-12 rounded-lg border-2 border-gray-200  bg-gray-50  text-text-main  px-4 transition-all placeholder:text-text-secondary/60" placeholder="(00) 00000-0000" type="tel"/>
+               <input [value]="phoneInputValue()" (input)="onChangePhoneInput($event)" mask="(00) 00000-0000" [dropSpecialCharacters]="true" [showMaskTyped]="true" class="w-full h-12 rounded-lg border-2 border-gray-200  bg-gray-50  text-text-main  px-4 transition-all placeholder:text-text-secondary/60" placeholder="(00) 00000-0000" type="tel"/>
                <span class="material-symbols-outlined absolute right-3 top-3 text-gray-400">call</span>
            </div>
       </label>

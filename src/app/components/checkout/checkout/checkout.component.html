@@ -1,6 +1,8 @@
 <app-checkout-header></app-checkout-header>
 <main class="flex-1 overflow-y-auto px-4 pt-4 pb-4 no-scrollbar scroll-smooth">
     <app-checkout-customer
+        [name]="name()"
+       [phone]="phone()"
        (setName)="name.set($event)"
        (setPhone)="phone.set($event)">
     </app-checkout-customer>

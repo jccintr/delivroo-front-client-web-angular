@@ -31,7 +31,7 @@ import { AlertDialogComponent } from "../../alert-dialog/alert-dialog.component"
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit {
   cartItems$!: Observable<CartItem[]>;
   private paymentService = inject(PaymentService);
   private feeService = inject(FeeService);
@@ -55,6 +55,35 @@ export class CheckoutComponent {
   constructor(public cartService: CartService,) {
     this.cartItems$ = this.cartService.cart$;
   }
+
+  ngOnInit(): void {
+    this.loadCustomerInfo();
+  }
+
+  private loadCustomerInfo(): void {
+    const savedData = localStorage.getItem('customerInfo');
+    
+    if (savedData) {
+      try {
+        const data = JSON.parse(savedData);
+        console.log(data)
+        // Atualiza os signals (o formulário reage automaticamente)
+        if (data.name) {
+          this.name.set(data.name);
+        }
+        if (data.phone) {
+          setTimeout(() => {
+          this.phone.set(data.phone);
+        }, 0);
+        }
+        
+        // Opcional: log para debug
+        // console.log('Dados do cliente carregados:', data);
+      } catch (e) {
+        console.warn('Erro ao parsear customerInfo do localStorage', e);
+      }
+    }
+  }
   
 
   onSetDelivery(value: boolean) {
@@ -71,6 +100,11 @@ export class CheckoutComponent {
     this.selectedFee.set(fee);
     console.log('Bairro selecionado:', fee);
    
+  }
+
+  saveCustomerInfo(): void {
+     const data = { name: this.name(),phone: this.phone() };
+     localStorage.setItem('customerInfo', JSON.stringify(data));
   }
 
   sendOrder() {
@@ -92,7 +126,7 @@ export class CheckoutComponent {
       this.showAlertDialog = true;
       return;
     }
-
+    this.saveCustomerInfo();
     console.log('Pedido sendo enviado...');
     console.log('Dados do pedido:', {
       name: this.name(),
