@@ -76,9 +76,12 @@ export class CheckoutComponent implements OnInit {
           this.phone.set(data.phone);
         }, 0);
         }
+        if (data.address) {
+          this.address.set(data.address);
+        }
         
         // Opcional: log para debug
-        // console.log('Dados do cliente carregados:', data);
+         console.log('Dados do cliente carregados:', data);
       } catch (e) {
         console.warn('Erro ao parsear customerInfo do localStorage', e);
       }
@@ -103,7 +106,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   saveCustomerInfo(): void {
-     const data = { name: this.name(),phone: this.phone() };
+     const data = { name: this.name(),phone: this.phone(), address: this.address() };
      localStorage.setItem('customerInfo', JSON.stringify(data));
   }
 

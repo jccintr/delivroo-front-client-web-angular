@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Input, OnInit, output, Output, signal } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnChanges, OnInit, output, Output, signal, SimpleChanges } from '@angular/core';
 import { Fee } from '../../../services/fee.service';
 
 @Component({
@@ -7,23 +7,33 @@ import { Fee } from '../../../services/fee.service';
   templateUrl: './checkout-delivery.component.html',
   styleUrl: './checkout-delivery.component.css'
 })
-export class CheckoutDeliveryComponent implements OnInit {
+export class CheckoutDeliveryComponent implements OnInit, OnChanges {
+
+  ngOnChanges(): void {
+    this.addressInputValue.set(this.address);
+  }
 
   ngOnInit() {
     this.emitInitialFeeIfPossible();
   }
 
+   @Input() address = '';
    @Input() delivery!: boolean;
    fees = input<Fee[]>([]);
    @Output() setAddres = new EventEmitter<string>();
    @Output() setDelivery = new EventEmitter<boolean>();
 
+   addressInputValue = signal(this.address);
+
    feeSelected = output<Fee>();
    public _selected = signal<Fee | null>(null);
  
-   onChangeAddressInput(event: Event){
-        this.setAddres.emit((event.target as HTMLInputElement).value);
-    }
+  
+    onChangeAddressInput(event: Event){
+      const value = (event.target as HTMLInputElement).value;
+      this.setAddres.emit(value);
+      this.addressInputValue.set(value);   // mantém sincronizado
+   }
 
    selectDeliveryType(isDelivery: boolean) {
     

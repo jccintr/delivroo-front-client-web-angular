@@ -41,6 +41,7 @@
               Endereço
             </span>
             <textarea
+              [value]="addressInputValue()"
               (input)="onChangeAddressInput($event)"
               class="w-full h-16 rounded-lg border-2 border-gray-200  bg-gray-50 text-text-main  px-4 focus:border-primary focus:ring-primary transition-all"
               placeholder="Av. Paulista, 1578"
