@@ -5,6 +5,8 @@ import { StoreNotFoundComponent } from './components/store-not-found/store-not-f
 import { ProductDetailsComponent } from './components/product-detail/product-details/product-details.component';
 import { CartComponent } from './components/cart/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout/checkout.component';
+import { CheckoutSuccessComponent } from './components/checkout/checkout-success/checkout-success.component';
+import { CheckoutFailureComponent } from './components/checkout/checkout-failure/checkout-failure.component';
 
 export const routes: Routes = [
    
@@ -13,6 +15,8 @@ export const routes: Routes = [
   { path: 'product', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'success', component: CheckoutSuccessComponent },
+  { path: 'failure', component: CheckoutFailureComponent },
   { path: ':store', component: StoreComponent },
   { path: '**', redirectTo: '' }
    

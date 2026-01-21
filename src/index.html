@@ -14,7 +14,40 @@
             display: none;
         }.no-scrollbar {
             -ms-overflow-style: none;scrollbar-width: none;}
-    </style>
+  </style>
+  <script>
+   function copyPixKey() {
+      const pixKeyElement = document.getElementById('pix-key');
+      const pixKey = pixKeyElement.textContent.trim();
+      const copyButton = document.getElementById('copy-pix-button');
+      const successMessage = document.getElementById('copy-success');
+
+      navigator.clipboard.writeText(pixKey)
+         .then(() => {
+            // Feedback visual
+            copyButton.innerHTML = `
+               <span class="material-symbols-outlined !fill-0 text-xl">check</span>
+               Copiado!
+            `;
+            copyButton.classList.add('bg-green-600', 'hover:bg-green-700');
+            successMessage.classList.remove('hidden');
+
+            // Volta ao normal após 2 segundos
+            setTimeout(() => {
+               copyButton.innerHTML = `
+                  <span class="material-symbols-outlined !fill-0 text-xl">content_copy</span>
+                  Copiar Chave
+               `;
+               copyButton.classList.remove('bg-green-600', 'hover:bg-green-700');
+               successMessage.classList.add('hidden');
+            }, 2000);
+         })
+         .catch(err => {
+            console.error('Erro ao copiar:', err);
+            alert('Não foi possível copiar a chave. Por favor, copie manualmente.');
+         });
+   }
+</script>
 </head>
 <body class="bg-[#f8f6f5]  font-display text-[#181311] antialiased pb-24">
   <app-root></app-root>

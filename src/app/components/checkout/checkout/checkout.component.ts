@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { Fee, FeeService } from '../../../services/fee.service';
 import { FinalizeOrderComponent } from "../finalize-order/finalize-order.component";
 import { AlertDialogComponent } from "../../alert-dialog/alert-dialog.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -52,7 +53,7 @@ export class CheckoutComponent implements OnInit {
   selectedPayment = signal<Payment | null>(null);
   selectedFee = signal<Fee | null>(null);
 
-  constructor(public cartService: CartService,) {
+  constructor(public cartService: CartService,private router: Router) {
     this.cartItems$ = this.cartService.cart$;
   }
 
@@ -143,6 +144,7 @@ export class CheckoutComponent implements OnInit {
      });
      this.validationErrorMessage.set('Pedido Enviado !');
      this.showAlertDialog = true;
+     this.router.navigate(['/success']); 
     // Aqui você implementará depois a lógica real de envio (API, etc)
 }
 
