@@ -1,6 +1,6 @@
 
-<main class="flex-1 max-w-md mx-auto w-full flex flex-col items-center px-6 py-12">
-   <div class="relative w-full max-w-[200px] aspect-square mb-10 flex items-center justify-center">
+<main class="flex-1 max-w-md mx-auto w-full flex flex-col items-center px-6 pt-6">
+   <div class="relative w-full max-w-50 aspect-square mb-10 flex items-center justify-center">
       <div class="absolute inset-0 bg-success/5 rounded-full"></div>
       <div class="absolute inset-4 bg-success/10 rounded-full"></div>
       <div class="relative z-10 w-28 h-28 bg-success rounded-full flex items-center justify-center shadow-2xl shadow-success/40">
@@ -8,25 +8,24 @@
       </div>
    </div>
    <div class="text-center mb-8">
-      <h1 class="text-[#181311] dark:text-white text-3xl font-bold leading-tight mb-3">Pedido Recebido!</h1>
-      <p class="text-[#181311]/70 dark:text-white/70 text-base font-normal leading-relaxed px-4">
+      <h1 class="text-[#181311]  text-3xl font-bold leading-tight mb-3">Pedido Recebido!</h1>
+      <p class="text-[#181311]/70  text-base font-normal leading-relaxed px-4">
         O estabelecimento já recebeu sua solicitação e está preparando seu pedido.
       </p>
     </div>
     <!-- Seção de Pagamento via Pix -->
-<div class="w-full max-w-sm bg-gray-50 dark:bg-white/5 rounded-2xl p-6 mb-10 border border-gray-200 dark:border-white/10 shadow-sm">
-   <h3 class="text-[#181311] dark:text-white text-xl font-bold mb-4 text-center">Pagamento via Pix</h3>
+@if(pix) {
+<div class="w-full max-w-sm bg-gray-50  rounded-2xl p-6 mb-10 border border-gray-200  shadow-sm">
+   <h3 class="text-[#181311]  text-xl font-bold mb-4 text-center">Pagamento via Pix</h3>
    
-   <p class="text-[#181311]/70 dark:text-white/70 text-center mb-4">
-      Use a chave abaixo para realizar o pagamento. É rápido e seguro!
-   </p>
+   <p class="text-[#181311]/70  text-center mb-4">Use a chave abaixo para realizar o pagamento.</p>
    
-   <div class="flex flex-col items-center gap-3 bg-white dark:bg-[#2c2c2c] rounded-xl p-4 border border-gray-200 dark:border-white/10">
-      <div class="flex-1 font-mono text-lg font-medium text-[#181311] dark:text-white break-all" id="pix-key">
-         exemploexemplo.com
+   <div class="flex flex-col items-center gap-3 bg-white dark:bg-[#2c2c2c] rounded-xl p-4 border border-gray-200 ">
+      <div class="flex-1 font-mono text-lg font-medium text-[#181311]  break-all" id="pix-key">
+         {{chavePix}}
       </div>
-      <div class="flex-1 font-mono text-lg font-medium text-[#181311] dark:text-white break-all" id="pix-key">
-         João da Silva Sauro
+      <div class="flex-1 font-mono text-lg font-medium text-[#181311]  break-all" id="pix-key">
+         {{favorecidoPix}}
       </div>
       <button 
          id="copy-pix-button"
@@ -37,24 +36,25 @@
          Copiar Chave
       </button>
    </div>
-   
+
    <!-- Mensagem de feedback (inicialmente escondida) -->
    <div id="copy-success" class="hidden mt-3 text-center text-success font-medium flex items-center justify-center gap-2">
       <span class="material-symbols-outlined text-xl">check_circle</span>
       Chave copiada com sucesso!
    </div>
 </div>
+}
+<!-- Fim da seção de Pagamento via Pix -->
 </main>
-<footer class="mt-auto p-6 max-w-md mx-auto w-full bg-white dark:bg-[#1c1c1c] border-t border-gray-100 dark:border-white/10">
+<footer class="mt-auto p-6 max-w-md mx-auto w-full bg-white dark:bg-[#1c1c1c] border-t border-gray-100 ">
    <div class="flex flex-col gap-3">
-      <button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2">
+      <button (click)="showLastOrder()" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2">
          <span class="material-symbols-outlined !fill-0 text-xl">map</span>
                 Acompanhar Pedido
       </button>
-      <button class="w-full bg-transparent hover:bg-gray-100 dark:hover:bg-white/5 text-[#181311] dark:text-white font-bold py-4 px-6 rounded-2xl transition-all border border-gray-200 dark:border-white/10">
+      <button (click)="returnToHome()" class="w-full bg-transparent hover:bg-gray-100  text-[#181311] dark:text-white font-bold py-4 px-6 rounded-2xl transition-all border border-gray-200 ">
                 Voltar ao Início
       </button>
    </div>
-   <div class="h-6"></div>
 </footer>
 

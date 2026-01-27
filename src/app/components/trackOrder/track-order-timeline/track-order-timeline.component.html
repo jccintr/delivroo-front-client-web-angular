@@ -1,0 +1,16 @@
+ <div class="bg-white  py-4">
+    @for (status of statusPedidoLog; track status.id) {
+      <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
+         <div class="flex flex-col items-center gap-1 pt-3">
+            <div class="text-primary">
+               <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">check_circle</span>
+            </div>
+        </div>
+         <div class="flex flex-1 flex-col py-3">
+            <p class="text-primary text-base font-bold leading-normal">
+               {{status.status_pedido.descricao}} <span class="text-[#8a6b60] text-sm font-semibold">{{status.data}}</span>
+            </p>
+         </div>
+      </div>
+    }
+</div>

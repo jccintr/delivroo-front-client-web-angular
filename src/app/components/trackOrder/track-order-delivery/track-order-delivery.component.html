@@ -1,0 +1,14 @@
+<div class="flex items-center gap-4 bg-white  px-4 min-h-[72px] justify-between">
+    <div class="flex items-center gap-4">
+        <div class="text-primary flex items-center justify-center rounded-xl bg-primary/10 shrink-0 size-12">
+            <span class="material-symbols-outlined text-3xl">{{delivery ? 'delivery_dining' : 'storefront'}}</span>
+        </div>
+        <div>
+            <p class="text-[#181311]  text-base font-semibold leading-normal flex-1 truncate">{{ delivery ? 'Delivery Padrão' : 'Retirar no estabelecimento' }}</p>
+            @if(delivery){
+              <p class="text-slate-700  text-sm font-normal">Entregar em: {{ addressDelivery }}</p>
+            }
+        </div>
+    </div>
+    
+</div>

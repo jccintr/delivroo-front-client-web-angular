@@ -7,6 +7,7 @@ import { CartComponent } from './components/cart/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout/checkout.component';
 import { CheckoutSuccessComponent } from './components/checkout/checkout-success/checkout-success.component';
 import { CheckoutFailureComponent } from './components/checkout/checkout-failure/checkout-failure.component';
+import { TrackOrderComponent } from './components/trackOrder/track-order/track-order.component';
 
 export const routes: Routes = [
    
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'success', component: CheckoutSuccessComponent },
   { path: 'failure', component: CheckoutFailureComponent },
+   { path: 'track', component: TrackOrderComponent },
   { path: ':store', component: StoreComponent },
   { path: '**', redirectTo: '' }
    

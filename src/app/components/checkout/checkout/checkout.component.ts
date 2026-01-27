@@ -7,13 +7,14 @@ import { CheckoutPaymentComponent } from "../checkout-payment/checkout-payment.c
 import { CheckoutInstructionsComponent } from "../checkout-instructions/checkout-instructions.component";
 import { CheckoutSummaryComponent } from "../checkout-summary/checkout-summary.component";
 import { Payment, PaymentService } from '../../../services/payment.service';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { CartItem, CartService } from '../../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { Fee, FeeService } from '../../../services/fee.service';
 import { FinalizeOrderComponent } from "../finalize-order/finalize-order.component";
 import { AlertDialogComponent } from "../../alert-dialog/alert-dialog.component";
 import { Router } from '@angular/router';
+import { OrderData, OrderResponse, StoreService } from '../../../services/store.service';
 
 @Component({
   selector: 'app-checkout',
@@ -33,6 +34,7 @@ import { Router } from '@angular/router';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
+  
   cartItems$!: Observable<CartItem[]>;
   private paymentService = inject(PaymentService);
   private feeService = inject(FeeService);
@@ -53,7 +55,7 @@ export class CheckoutComponent implements OnInit {
   selectedPayment = signal<Payment | null>(null);
   selectedFee = signal<Fee | null>(null);
 
-  constructor(public cartService: CartService,private router: Router) {
+  constructor(public cartService: CartService,private router: Router,private storeService: StoreService) {
     this.cartItems$ = this.cartService.cart$;
   }
 
@@ -111,7 +113,7 @@ export class CheckoutComponent implements OnInit {
      localStorage.setItem('customerInfo', JSON.stringify(data));
   }
 
-  sendOrder() {
+  async sendOrder() {
 
     if(!this.name().trim()) {
       this.validationErrorMessage.set('Por favor, informe o seu nome.');
@@ -132,20 +134,36 @@ export class CheckoutComponent implements OnInit {
     }
     this.saveCustomerInfo();
     console.log('Pedido sendo enviado...');
-    console.log('Dados do pedido:', {
-      name: this.name(),
-      phone: this.phone(),
+    const itensPedido = await firstValueFrom(this.cartItems$);
+
+    const orderData : OrderData = {
+      tenant_id: this.storeService.getStoreId(),
+      nome: this.name(),
+      telefone: this.phone(),
       delivery: this.delivery(),
-      address: this.address(),
-      instructions: this.instructions(),
-      payment: this.selectedPayment(),
-      fee: this.selectedFee(),
-   
-     });
-     this.validationErrorMessage.set('Pedido Enviado !');
-     this.showAlertDialog = true;
-     this.router.navigate(['/success']); 
-    // Aqui você implementará depois a lógica real de envio (API, etc)
+      endereco: this.address(),
+      taxa_id: this.selectedFee()?.id,
+      pagamento_id: this.selectedPayment()?.id,
+      observacao: this.instructions(),
+      itensPedido: itensPedido  
+     };
+     console.log('Request do pedido:', orderData);
+     // enviar o pedido chamando createOrder do StoreService
+     try {
+        const response: OrderResponse = await firstValueFrom(this.storeService.createOrder(orderData));
+        console.log('Resposta do pedido:', response);
+        //limpar o carrinho e salvar o id do pedido no localStorage
+        this.cartService.limparCarrinho();
+        localStorage.setItem('lastOrderId', response.id.toString());
+        //navegar para a página de sucesso
+        this.router.navigate(['/success'],{state: {pix: response.forma_pagamento==='Pix'?true:false}}); //passar a flag pix para success
+     } catch (error) {    
+        console.error('Erro ao enviar o pedido:', error);
+        this.validationErrorMessage.set('Erro ao enviar o pedido. Por favor, tente novamente.');
+        this.showAlertDialog = true;
+        return;
+    }
+
 }
 
 closeAlertDialog(){

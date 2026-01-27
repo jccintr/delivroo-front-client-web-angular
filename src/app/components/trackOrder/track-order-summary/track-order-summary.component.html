@@ -1,0 +1,30 @@
+<div class="bg-white ">
+    <h3 class="text-[#181311]  text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6 mb-4">Resumo do Pedido</h3>
+    @for (item of itensPedido; track item.id) {
+        <div class="px-4 space-y-4 pb-6">
+            <div class="flex justify-between items-start">
+                <div class="flex gap-3">
+                    <span class="bg-gray-200  text-text-secondary px-2 py-0.5 rounded text-sm font-bold h-fit">{{item.quantidade}}x</span>
+                    <div>
+                        <p class="font-medium text-text-main">{{item.produto.nome}}</p>
+                    </div>
+                </div>
+                <p class="text-primary font-semibold whitespace-nowrap">R$ {{item.total.replace('.', ',')}}</p>
+           </div>
+        </div>
+   }
+    <div class="border-t border-gray-100 px-4 py-4 space-y-2">
+        <div class="flex justify-between text-sm text-slate-700">
+            <span>Total dos Produtos</span>
+            <span>R$ {{total.toFixed(2).replace('.', ',')}}</span>
+        </div>
+        <div class="flex justify-between text-sm text-slate-700">
+            <span>Taxa de Entrega</span>
+            <span>+R$ {{taxaEntrega.replace('.', ',')}}</span>
+        </div>
+        <div class="flex justify-between text-lg font-bold text-primary pt-2 border-t border-dashed border-gray-200 ">
+            <span>Total</span>
+            <span>R$ {{totalOrder().toFixed(2).replace('.', ',')}}</span>
+        </div>
+    </div>
+</div>

@@ -3,8 +3,11 @@
       <span class="material-symbols-outlined text-slate-800 " style="font-size: 20px;">arrow_back</span>
    </button>
 </div>
+
 <div class="relative w-full h-80 md:h-96">
+   @if(image){
    <div class="absolute inset-0 bg-cover bg-center" data-alt="product image" [ngStyle]="{'background-image': 'url(' + storeService.BASE_STORAGE + '/' + image + ')'}">
    </div>
    <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background-light to-transparent"></div>
+  }
 </div>
