@@ -27,10 +27,12 @@
   (instructionsChange)="instructions = $event"
 >
 </app-product-instructions>
-<app-product-add 
-  [productTotal]="productTotal" 
-  [quantity]="quantity"
-  (quantityChange)="onQuantityChange($event)"
-  (addToCart)="onAddToCart()"
-  >
-</app-product-add>
+@if(isOpen){
+  <app-product-add 
+    [productTotal]="productTotal" 
+    [quantity]="quantity"
+    (quantityChange)="onQuantityChange($event)"
+    (addToCart)="onAddToCart()"
+    >
+  </app-product-add>
+}

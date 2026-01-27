@@ -19,6 +19,7 @@ import { Location } from '@angular/common';
 export class ProductDetailsComponent implements OnInit{
   productData: any = {}; 
   waitTime: string = '';
+  isOpen: boolean = false;
   productTotal: number = 0;
   quantity: number = 1;
   totalExtras: number = 0;
@@ -34,6 +35,7 @@ export class ProductDetailsComponent implements OnInit{
       this.productData = product;
       this.productTotal = this.quantity * product.preco;
       this.waitTime = this.storeService.getWaitTime();
+      this.isOpen = this.storeService.getIsOpen();
     }
   }
 

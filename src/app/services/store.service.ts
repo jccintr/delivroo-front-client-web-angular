@@ -83,6 +83,7 @@ export class StoreService {
   private storeid: number = 0;
   private pixData: PixData = {chave: '', favorecido: ''};
   private slug: string = '';
+  private isOpen: boolean = true;
   constructor(private http: HttpClient) {}
 
   getStoreData(store: string): Observable<any> {
@@ -97,6 +98,7 @@ export class StoreService {
         this.storeid = data.id;
         this.pixData = {chave: data.chave_pix,favorecido: data.favorecido_pix};
         this.slug = data.slug;
+        this.isOpen = data.aberto
       })
     );
 }
@@ -116,6 +118,10 @@ export class StoreService {
 
   getStoreSlug(){
     return this.slug;
+  }
+
+  getIsOpen(){
+    return this.isOpen;
   }
 
 createOrder(orderData: OrderData): Observable<any> {
