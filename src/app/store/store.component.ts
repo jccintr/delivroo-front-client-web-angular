@@ -17,6 +17,8 @@ import { FeeService } from '../services/fee.service';
   styleUrl: './store.component.css'
 })
 export class StoreComponent implements OnInit, OnDestroy {
+  isLoading = signal(true);        
+  hasError  = signal(false);
   storeName: string = '';
   store: any = {};
   storeData: any = {};
@@ -66,10 +68,12 @@ export class StoreComponent implements OnInit, OnDestroy {
          }
          this.products = response.produtos;
          this.filteredProducts = [...this.products];
-        
+        this.isLoading.set(false);
       },
       error: (error) => {
         console.error('Erro ao carregar dados da loja:', error);
+        this.hasError.set(true);
+        this.isLoading.set(false);
         this.router.navigate(['/storeNotFound']);
       },
     });

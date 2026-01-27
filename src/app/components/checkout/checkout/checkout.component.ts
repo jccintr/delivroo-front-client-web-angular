@@ -38,7 +38,7 @@ export class CheckoutComponent implements OnInit {
   cartItems$!: Observable<CartItem[]>;
   private paymentService = inject(PaymentService);
   private feeService = inject(FeeService);
- 
+  isSendingOrder = signal(false);
   name = signal('');
   phone = signal('');
   delivery = signal(true);
@@ -115,6 +115,9 @@ export class CheckoutComponent implements OnInit {
 
   async sendOrder() {
 
+    if (this.isSendingOrder()) return;
+   
+
     if(!this.name().trim()) {
       this.validationErrorMessage.set('Por favor, informe o seu nome.');
       this.showAlertDialog = true;
@@ -134,6 +137,7 @@ export class CheckoutComponent implements OnInit {
     }
     this.saveCustomerInfo();
     console.log('Pedido sendo enviado...');
+    this.isSendingOrder.set(true);
     const itensPedido = await firstValueFrom(this.cartItems$);
 
     const orderData : OrderData = {
@@ -151,6 +155,7 @@ export class CheckoutComponent implements OnInit {
      // enviar o pedido chamando createOrder do StoreService
      try {
         const response: OrderResponse = await firstValueFrom(this.storeService.createOrder(orderData));
+        this.isSendingOrder.set(false);
         console.log('Resposta do pedido:', response);
         //limpar o carrinho e salvar o id do pedido no localStorage
         this.cartService.limparCarrinho();
