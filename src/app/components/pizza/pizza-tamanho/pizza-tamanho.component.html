@@ -1,0 +1,26 @@
+<div class="mt-6 px-4">
+  <div class="flex justify-between items-center mb-3 px-1">
+    <h3 class="text-lg font-bold text-slate-900">Tamanho da Pizza</h3>
+    <span class="px-2 py-1 rounded bg-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider">
+      Obrigatório
+    </span>
+  </div>
+
+  <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 divide-y divide-slate-100">
+    @for (tamanho of tamanhos; track $index) {
+      <label class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50 transition-colors">
+        <div class="flex items-center gap-3">
+          <input
+            type="radio"
+            name="tamanho-pizza"
+            [value]="tamanho"
+            [checked]="tamanho === selectedTamanho"
+            (change)="onTamanhoChange(tamanho)"
+            class="size-5 accent-primary border-slate-300 focus:ring-primary bg-transparent"
+          />
+          <span class="text-slate-700 font-medium">{{ tamanho }}</span>
+        </div>
+      </label>
+    }
+  </div>
+</div>

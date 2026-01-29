@@ -1,0 +1,24 @@
+<app-product-header 
+   [image]="productData.imagem"
+>
+</app-product-header>
+<app-pizza-description 
+   [name]="productData.nome" 
+   [description]="productData.descricao" 
+   [price]="productData.preco"
+   [waitTime]="waitTime"
+></app-pizza-description>
+<app-pizza-tamanho 
+  [tamanhos]="tamanhos"
+  (tamanhoSelecionado)="onTamanhoSelecionado($event)"
+></app-pizza-tamanho>
+<app-pizza-sabores 
+  [quantidadeSaboresInicial]="quantidadeSabores"
+  (quantidadeSaboresChange)="onQuantidadeSaboresChange($event)"
+></app-pizza-sabores>
+<app-pizza-sabores-seletor
+  [maxSabores]="quantidadeSabores"
+  [saboresSelecionados]="saboresSelecionados"
+  [tamanhoSelecionado]="tamanhoSelecionado"
+  (saboresChange)="setSaboresSelecionados($event)"
+/>

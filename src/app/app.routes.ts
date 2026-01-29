@@ -8,12 +8,16 @@ import { CheckoutComponent } from './components/checkout/checkout/checkout.compo
 import { CheckoutSuccessComponent } from './components/checkout/checkout-success/checkout-success.component';
 import { CheckoutFailureComponent } from './components/checkout/checkout-failure/checkout-failure.component';
 import { TrackOrderComponent } from './components/trackOrder/track-order/track-order.component';
+import { PizzaDetailsComponent } from './components/pizza/pizza-details/pizza-details.component';
+
 
 export const routes: Routes = [
    
   { path: '', component: HomeComponent },
   { path: 'storeNotFound', component: StoreNotFoundComponent },
   { path: 'product', component: ProductDetailsComponent },
+  { path: 'pizza', component: PizzaDetailsComponent },
+  
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'success', component: CheckoutSuccessComponent },

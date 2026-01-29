@@ -9,6 +9,7 @@ import { ProductListComponent } from "../components/product-list/product-list.co
 import { CartStatusComponent } from "../components/cart-status/cart-status.component";
 import { PaymentService } from '../services/payment.service';
 import { FeeService } from '../services/fee.service';
+import { PizzasService } from '../services/pizzas.service';
 
 @Component({
   selector: 'app-store',
@@ -34,7 +35,8 @@ export class StoreComponent implements OnInit, OnDestroy {
     private storeService: StoreService,
     private router: Router,
     private paymentService: PaymentService,
-    private feeService: FeeService
+    private feeService: FeeService,
+    private pizzasService: PizzasService
   ) {
     
     effect(() => {
@@ -62,13 +64,14 @@ export class StoreComponent implements OnInit, OnDestroy {
        
         this.paymentService.setPayments(response.pagamentos);
         this.feeService.setFees(response.taxas);
+        this.pizzasService.setPizzas(response.pizzas);
         this.categories = response.categorias;
         if (this.categories.length > 0) {
             this.selectedCategoryId = this.categories[0].id;
          }
          this.products = response.produtos;
          this.filteredProducts = [...this.products];
-        this.isLoading.set(false);
+         this.isLoading.set(false);
       },
       error: (error) => {
         console.error('Erro ao carregar dados da loja:', error);

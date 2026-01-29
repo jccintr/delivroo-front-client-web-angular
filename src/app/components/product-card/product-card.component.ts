@@ -16,8 +16,12 @@ export class ProductCardComponent {
    @Input() product: any = {};
 
     viewProductDetails(product: any) {
-     // console.log(product)
-      this.router.navigate(['/product'], { state: { product } });
+      if(product.pizza){
+          this.router.navigate(['/pizza'], { state: { product } });
+      } else {
+        this.router.navigate(['/product'], { state: { product } });
+      }
+     
     }
 
 }
