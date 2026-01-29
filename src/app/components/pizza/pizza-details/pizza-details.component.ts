@@ -8,7 +8,8 @@ import { PizzaDescriptionComponent } from "../pizza-description/pizza-descriptio
 import { PizzaTamanhoComponent } from "../pizza-tamanho/pizza-tamanho.component";
 import { PizzaSaboresComponent } from "../pizza-sabores/pizza-sabores.component";
 import { PizzaSaboresSeletorComponent } from "../pizza-sabores-seletor/pizza-sabores-seletor.component";
-import { Pizza } from '../../../services/pizzas.service';
+import { BordaPizza, Pizza } from '../../../services/pizzas.service';
+import { PizzaBordaComponent } from "../pizza-borda/pizza-borda.component";
 
 export interface AdicionalPizza {
   id: number;
@@ -21,19 +22,12 @@ export interface AdicionalPizza {
 
 
 
-export interface BordaPizza {
-  id: number;
-  user_id: number;
-  nome: string;
-   grande: string;
-  broto: string;
-  ativo: boolean;
-}
+
 
 @Component({
   selector: 'app-pizza-details',
   standalone: true,
-  imports: [ProductHeaderComponent, PizzaDescriptionComponent, PizzaTamanhoComponent, PizzaSaboresComponent, PizzaSaboresSeletorComponent],
+  imports: [ProductHeaderComponent, PizzaDescriptionComponent, PizzaTamanhoComponent, PizzaSaboresComponent, PizzaSaboresSeletorComponent, PizzaBordaComponent],
   templateUrl: './pizza-details.component.html',
   styleUrl: './pizza-details.component.css'
 })
@@ -48,6 +42,7 @@ export class PizzaDetailsComponent implements OnInit{
   tamanhoSelecionado: string = 'Broto';
   quantidadeSabores: number = 1;
   saboresSelecionados: Pizza[] = [];
+  bordaSelecionada: BordaPizza | null = null;
   extras: { nome: string; valor: number }[] = [];
   requiredItems: { nome: string; valor: string }[] = [];
   instructions: string = '';
@@ -91,6 +86,16 @@ setSaboresSelecionados(novosSabores: Pizza[]) {
       nome: s.nome,
       // adicione outros campos que quiser ver
     })));
+  }
+
+  setBordaSelecionada(borda: BordaPizza) {  // ← Novo método para log e atualização
+    this.bordaSelecionada = borda;
+    console.log('Borda selecionada atualizada no details:', this.bordaSelecionada);
+    console.table({
+      id: borda.id,
+      nome: borda.nome,
+      preco: this.tamanhoSelecionado === 'Grande' ? borda.grande : borda.broto
+    });
   }
 
 }
