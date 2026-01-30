@@ -26,3 +26,8 @@
   [tamanhoSelecionado]="tamanhoSelecionado" 
   (bordaSelecionadaChange)="setBordaSelecionada($event)"
   ></app-pizza-borda>
+<app-pizza-extras
+  [tamanhoSelecionado]="tamanhoSelecionado"
+  (extrasSelecionadosChange)="extras = $event"
+  (totalExtrasChange)="totalExtras = $event"
+/>

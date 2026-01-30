@@ -8,17 +8,10 @@ import { PizzaDescriptionComponent } from "../pizza-description/pizza-descriptio
 import { PizzaTamanhoComponent } from "../pizza-tamanho/pizza-tamanho.component";
 import { PizzaSaboresComponent } from "../pizza-sabores/pizza-sabores.component";
 import { PizzaSaboresSeletorComponent } from "../pizza-sabores-seletor/pizza-sabores-seletor.component";
-import { BordaPizza, Pizza } from '../../../services/pizzas.service';
+import { AdicionalPizza, BordaPizza, Pizza } from '../../../services/pizzas.service';
 import { PizzaBordaComponent } from "../pizza-borda/pizza-borda.component";
+import { PizzaExtrasComponent } from "../pizza-extras/pizza-extras.component";
 
-export interface AdicionalPizza {
-  id: number;
-  user_id: number;
-  nome: string;
-  broto: string;
-  grande: string;
-  ativo: boolean
-}
 
 
 
@@ -27,7 +20,7 @@ export interface AdicionalPizza {
 @Component({
   selector: 'app-pizza-details',
   standalone: true,
-  imports: [ProductHeaderComponent, PizzaDescriptionComponent, PizzaTamanhoComponent, PizzaSaboresComponent, PizzaSaboresSeletorComponent, PizzaBordaComponent],
+  imports: [ProductHeaderComponent, PizzaDescriptionComponent, PizzaTamanhoComponent, PizzaSaboresComponent, PizzaSaboresSeletorComponent, PizzaBordaComponent, PizzaExtrasComponent],
   templateUrl: './pizza-details.component.html',
   styleUrl: './pizza-details.component.css'
 })
@@ -43,7 +36,7 @@ export class PizzaDetailsComponent implements OnInit{
   quantidadeSabores: number = 1;
   saboresSelecionados: Pizza[] = [];
   bordaSelecionada: BordaPizza | null = null;
-  extras: { nome: string; valor: number }[] = [];
+  extras: AdicionalPizza[] = [];
   requiredItems: { nome: string; valor: string }[] = [];
   instructions: string = '';
 

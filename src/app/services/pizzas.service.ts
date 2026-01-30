@@ -20,16 +20,28 @@ export interface BordaPizza {
   ativo: boolean;
 }
 
+export interface AdicionalPizza {
+  id: number;
+  user_id: number;
+  nome: string;
+  broto: string;
+  grande: string;
+  ativo: boolean
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class PizzasService {
    private pizzasSignal = signal<Pizza[]>([]);
    private bordasSignal = signal<BordaPizza[]>([]);
+   private adicionaisPizzaSignal = signal<AdicionalPizza[]>([]);
 
   // O que os componentes vão consumir (somente leitura)
   readonly pizzas = this.pizzasSignal.asReadonly();
   readonly bordas = this.bordasSignal.asReadonly();
+  readonly adicionaisPizza = this.adicionaisPizzaSignal.asReadonly();
 
   // Método para atualizar (chamado apenas pelo componente que carrega os dados)
   setPizzas(pizzas: Pizza[]) {
@@ -38,5 +50,8 @@ export class PizzasService {
 
   setBordas(bordas: BordaPizza[]) {
     this.bordasSignal.set(bordas);
+  }
+  setAdicionaisPizza(adicionais: AdicionalPizza[]) {
+    this.adicionaisPizzaSignal.set(adicionais);
   }
 }

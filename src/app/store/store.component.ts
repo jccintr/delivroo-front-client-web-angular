@@ -66,6 +66,7 @@ export class StoreComponent implements OnInit, OnDestroy {
         this.feeService.setFees(response.taxas);
         this.pizzasService.setPizzas(response.pizzas);
         this.pizzasService.setBordas(response.bordas);
+        this.pizzasService.setAdicionaisPizza(response.adicional_pizza);
         this.categories = response.categorias;
         if (this.categories.length > 0) {
             this.selectedCategoryId = this.categories[0].id;

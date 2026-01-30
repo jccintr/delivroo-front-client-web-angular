@@ -1,0 +1,39 @@
+<div class="mt-6 px-4">
+  <div class="flex justify-between items-center mb-3 px-1">
+    <h3 class="text-lg font-bold text-slate-900">Extras</h3>
+    <span class="px-2 py-1 rounded bg-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider">
+      Opcional
+    </span>
+  </div>
+
+  <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 divide-y divide-slate-100">
+    @for (adicional of adicionais; track adicional.id) {
+      <label 
+        class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50 transition-colors"
+        (click)="toggleExtra(adicional); $event.preventDefault()"
+      >
+        <div class="flex items-center gap-3 flex-1">
+          <input
+            type="checkbox"
+            [checked]="isSelected(adicional)"
+            class="size-5 rounded border-slate-300 text-primary focus:ring-primary accent-primary"
+            readonly
+          />
+          <span class="text-slate-700 font-medium">{{ adicional.nome }}</span>
+        </div>
+
+        @if (getPreco(adicional) === '0,00') {
+          <span class="text-sm font-bold text-slate-400">Grátis</span>
+        } @else {
+          <span class="text-sm font-bold text-primary">+R$ {{ getPreco(adicional) }}</span>
+        }
+      </label>
+    }
+
+    @if (adicionais.length === 0) {
+      <div class="p-6 text-center text-slate-500 text-sm">
+        Nenhum extra disponível no momento
+      </div>
+    }
+  </div>
+</div>
