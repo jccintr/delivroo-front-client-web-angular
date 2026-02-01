@@ -1,10 +1,9 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { AdicionalPizza, PizzasService } from '../../../services/pizzas.service';
-import { ProductExtraItemComponent } from "../../product-detail/product-extra-item/product-extra-item.component";
 
 @Component({
   selector: 'app-pizza-extras',
-  imports: [ProductExtraItemComponent],
+  imports: [],
   templateUrl: './pizza-extras.component.html',
   styleUrl: './pizza-extras.component.css'
 })

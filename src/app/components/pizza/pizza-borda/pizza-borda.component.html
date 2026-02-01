@@ -24,7 +24,7 @@
         @if(getPrecoBorda(borda) === '0.00') {
             <span class="text-sm font-bold text-slate-400">Grátis</span>
         } @else {
-            <span class="text-sm font-bold text-primary">R$ {{ getPrecoBorda(borda).replace('.', ',') }}</span>
+            <span class="text-sm font-bold text-primary">+R$ {{ getPrecoBorda(borda).replace('.', ',') }}</span>
         }
       </label>
     }
