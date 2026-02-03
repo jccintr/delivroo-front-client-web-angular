@@ -17,19 +17,15 @@ export class TrackOrderComponent implements OnInit {
 
    lastOrder: LastOrderResponse | null = null;
    slug: string;
+   isLoading = true;          
+   hasError = false;
     
     constructor(private storeService: StoreService,private router: Router) {
        this.slug = this.storeService.getStoreSlug();
     }
     
     async ngOnInit(): Promise<void> {
-  
-        try {
-          this.lastOrder = await firstValueFrom(this.storeService.getLastOrder());  
-        } catch (error) {
-            console.error('Erro ao carregar o último pedido:', error);
-        }
-  
+       await this.loadOrder();
     }
 
      returnToHome(): void {
@@ -37,9 +33,24 @@ export class TrackOrderComponent implements OnInit {
       this.router.navigate([`/${this.slug}`]);
      }
 
-     refreshLastOrder(): void {
+    async refreshLastOrder(): Promise<void> {
       console.log('Atualizando o pedido...');
-      this.ngOnInit();
-     }
+      await this.loadOrder();   // mesma função usada no init e no refresh
+   }
+
+  private async loadOrder(): Promise<void> {
+    try {
+      this.isLoading = true;
+      this.hasError = false;
+
+      this.lastOrder = await firstValueFrom(this.storeService.getLastOrder());
+      console.log('Último pedido carregado:', this.lastOrder);
+    } catch (error) {
+      console.error('Erro ao carregar o último pedido:', error);
+      this.hasError = true;
+    } finally {
+      this.isLoading = false;
+    }
+  }
 
 }

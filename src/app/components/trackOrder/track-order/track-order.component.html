@@ -1,21 +1,77 @@
 <div class="max-w-120 mx-auto bg-white min-h-screen shadow-sm relative">
-   <div class="flex items-center bg-white  p-4 pb-2 justify-center sticky top-0 z-10">
-      <h2 class="text-[#181311]  text-lg font-bold leading-tight tracking-[-0.015em] text-center">Pedido #{{lastOrder?.token}}</h2>
-      <button (click)="refreshLastOrder()" aria-label="Atualizar" class="w-10 h-10 flex items-center justify-center text-primary active:scale-95 transition-transform absolute right-4">
-         <span class="material-symbols-outlined">refresh</span>
+
+  <!-- Loading -->
+  @if (isLoading) {
+    <div class="fixed inset-0 flex items-center justify-center bg-white/80 z-50">
+      <div class="flex flex-col items-center gap-4">
+        <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-gray-600 font-medium">Carregando pedido...</p>
+      </div>
+    </div>
+  }
+
+  <!-- Erro -->
+  @else if (hasError) {
+    <div class="flex flex-col items-center justify-center min-h-screen gap-6 p-6 text-center">
+      <h2 class="text-2xl font-bold text-red-600">Não foi possível carregar o pedido</h2>
+      <p class="text-gray-600 max-w-md">
+        Houve um problema ao buscar as informações. Tente novamente.
+      </p>
+      <div class="flex gap-4">
+        <button 
+          (click)="refreshLastOrder()"
+          class="px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary/90">
+          Tentar novamente
+        </button>
+        <button 
+          (click)="returnToHome()"
+          class="px-6 py-3 bg-gray-200 text-gray-800 rounded-xl font-medium hover:bg-gray-300">
+          Voltar ao início
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Conteúdo principal - só aparece quando NÃO está carregando e NÃO tem erro -->
+  @else {
+    <div class="flex items-center bg-white p-4 pb-2 justify-center sticky top-0 z-10">
+      <h2 class="text-[#181311] text-lg font-bold leading-tight tracking-[-0.015em] text-center">
+        Pedido #{{lastOrder?.token}}
+      </h2>
+      <button 
+        (click)="refreshLastOrder()" 
+        aria-label="Atualizar" 
+        class="w-10 h-10 flex items-center justify-center text-primary active:scale-95 transition-transform absolute right-4">
+        <span class="material-symbols-outlined">refresh</span>
       </button>
-   </div>
-   <p class="text-[#8a6b60]  text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Realizado em {{lastOrder?.data}}</p>
-   <app-track-order-timeline [statusPedidoLog]="lastOrder!.status_pedido_log">></app-track-order-timeline>
-   <div class="h-4 bg-background-light "></div>
-   <app-track-order-delivery [delivery]="lastOrder!.delivery" [addressDelivery]="lastOrder!.endereco || ''"></app-track-order-delivery>
-   <div class="h-4 bg-background-light "></div>
-   <app-track-order-payment [payment]="lastOrder!.forma_pagamento"></app-track-order-payment>
-   <div class="h-4 bg-background-light "></div>
-   <app-track-order-summary [itensPedido]="lastOrder!.itens_pedido" [total]="lastOrder!.total" [taxaEntrega]="lastOrder!.taxa_entrega" [delivery]="lastOrder!.delivery"></app-track-order-summary>
-   <div class="fixed bottom-0 left-0 right-0 max-w-120 mx-auto bg-white/80  backdrop-blur-md p-4 space-y-3 border-t border-gray-100 ">
-      <button (click)="returnToHome()" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-colors shadow-lg shadow-primary/20">
-                Voltar ao Início
+    </div>
+
+    <p class="text-[#8a6b60] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">
+      Realizado em {{lastOrder?.data}}
+    </p>
+
+    <app-track-order-timeline [statusPedidoLog]="lastOrder?.status_pedido_log ?? []"></app-track-order-timeline>
+
+    <div class="h-4 bg-background-light"></div>
+    <app-track-order-delivery [delivery]="lastOrder?.delivery ?? false" [addressDelivery]="lastOrder?.endereco || ''"></app-track-order-delivery>
+
+    <div class="h-4 bg-background-light"></div>
+    <app-track-order-payment [payment]="lastOrder?.forma_pagamento ?? ''"></app-track-order-payment>
+
+    <div class="h-4 bg-background-light"></div>
+    <app-track-order-summary 
+      [itensPedido]="lastOrder?.itens_pedido ?? []" 
+      [total]="lastOrder?.total ?? 0" 
+      [taxaEntrega]="lastOrder?.taxa_entrega ?? '0.00'" 
+      [delivery]="lastOrder?.delivery ?? false">
+    </app-track-order-summary>
+
+    <div class="fixed bottom-0 left-0 right-0 max-w-120 mx-auto bg-white/80 backdrop-blur-md p-4 space-y-3 border-t border-gray-100">
+      <button 
+        (click)="returnToHome()" 
+        class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-colors shadow-lg shadow-primary/20">
+        Voltar ao Início
       </button>
-   </div>
+    </div>
+  }
 </div>
