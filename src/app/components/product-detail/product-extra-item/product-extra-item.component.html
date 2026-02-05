@@ -3,5 +3,5 @@
         <input [checked]="isSelected" (change)="onCheckboxChange($event)" class="size-5 rounded accent-primary border-slate-300 focus:ring-primary bg-transparent" type="checkbox"/>
         <span class="text-slate-700  font-medium">{{extra.nome}}</span>
     </div>
-    <span class="text-slate-500  font-medium text-sm">+R$ {{extra.valor}}</span>
+    <span class="text-slate-500  font-medium text-sm">+R$ {{extra.valor.replace('.', ',')}}</span>
 </label>

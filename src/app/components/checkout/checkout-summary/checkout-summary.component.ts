@@ -18,8 +18,16 @@ export class CheckoutSummaryComponent {
       
   }
 
+ 
+
   getTotalPedido(): number {
-    return this.delivery ? Number(this.selectedFee?.valor) + this.cartService.getValorTotal() : this.cartService.getValorTotal();
+    const subtotal = this.cartService.getValorTotal();
+    if (!this.delivery) {
+      return subtotal;
+    }
+    // Use ?? 0 para evitar NaN se selectedFee for null
+    const taxa = Number(this.selectedFee?.valor ?? 0);
+    return taxa + subtotal;
   }
 
 

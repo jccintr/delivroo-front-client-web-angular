@@ -101,13 +101,10 @@ export class CheckoutComponent implements OnInit {
     console.log('Forma de pagamento selecionada:', payment);
   }
 
-  onFeeSelected(fee: Fee) {
-
+  onFeeSelected(fee: Fee | null) {
     this.selectedFee.set(fee);
     console.log('Bairro selecionado:', fee);
-   
   }
-
   saveCustomerInfo(): void {
      const data = { name: this.name(),phone: this.phone(), address: this.address() };
      localStorage.setItem('customerInfo', JSON.stringify(data));
@@ -135,6 +132,14 @@ export class CheckoutComponent implements OnInit {
       this.showAlertDialog = true;
       return;
     }
+
+     if(this.delivery() && !this.selectedFee()) {
+      this.validationErrorMessage.set('Por favor, selecione o seu bairro.');
+      this.showAlertDialog = true;
+      return;
+    }
+
+
     this.saveCustomerInfo();
     console.log('Pedido sendo enviado...');
     this.isSendingOrder.set(true);

@@ -60,7 +60,9 @@
               Selecione o bairro
             </span>
             <select (change)="onFeeChange($event)" class="w-full p-4 text-slate-700 font-medium rounded-lg border-2 border-gray-200  bg-gray-50 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary">
-               @for (fee of fees(); track fee.id) {
+              <!-- Opção default: inicia selecionada e desabilitada para forçar escolha -->
+              <option value="" selected disabled>Selecione o bairro</option>
+              @for (fee of fees(); track fee.id) {
                   <option
                     [value]="fee.id"
                     [selected]="_selected()?.id === fee.id"

@@ -7,16 +7,17 @@ import { Fee } from '../../../services/fee.service';
   templateUrl: './checkout-delivery.component.html',
   styleUrl: './checkout-delivery.component.css'
 })
-export class CheckoutDeliveryComponent implements OnInit, OnChanges {
+export class CheckoutDeliveryComponent implements  OnChanges {
 
   ngOnChanges(): void {
     this.addressInputValue.set(this.address);
   }
-
+ 
+  /*
   ngOnInit() {
     this.emitInitialFeeIfPossible();
   }
-
+*/
    @Input() address = '';
    @Input() delivery!: boolean;
    fees = input<Fee[]>([]);
@@ -25,7 +26,7 @@ export class CheckoutDeliveryComponent implements OnInit, OnChanges {
 
    addressInputValue = signal(this.address);
 
-   feeSelected = output<Fee>();
+  feeSelected = output<Fee | null>();
    public _selected = signal<Fee | null>(null);
  
   
@@ -51,13 +52,16 @@ export class CheckoutDeliveryComponent implements OnInit, OnChanges {
       }
  }
 
+ /*
   private emitSelection() {
     const selected = this._selected();
     if (selected) {
       this.feeSelected.emit(selected);
     }
   }
+*/
 
+/*
   private emitInitialFeeIfPossible() {
     // Só executa se houver itens e ainda não houver seleção
     if (this.fees().length > 0 && !this._selected()) {
@@ -66,8 +70,9 @@ export class CheckoutDeliveryComponent implements OnInit, OnChanges {
       this.feeSelected.emit(firstFee);
       // Opcional: console.log('Fee inicial selecionado automaticamente:', firstFee);
     }
+   
   }
-
+*/
    
 
 
