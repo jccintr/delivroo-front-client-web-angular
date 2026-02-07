@@ -238,11 +238,11 @@ private formataExtras(): string {
 
   const itensFormatados = this.extras.map(extra => {
     const valor = Number(extra[campoPreco] || 0);
-    const valorStr = valor > 0 ? valor.toFixed(2) : '0.00';
+    const valorStr = valor > 0 ? valor.toFixed(2).replace('.', ',') : '0,00';
     return `${extra.nome} : ${valorStr}`;
   });
 
-  return itensFormatados.join('; ');
+  return itensFormatados.join(';');
 }
  
 

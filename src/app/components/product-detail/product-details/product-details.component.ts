@@ -101,7 +101,7 @@ export class ProductDetailsComponent implements OnInit{
         return '';
       }
       return extras
-        .map(item => `${item.nome} : ${item.valor.toFixed(2)}`)
+        .map(item => `${item.nome} : ${item.valor.toFixed(2).replace('.', ',')}`)
         .join(';');
   }
 

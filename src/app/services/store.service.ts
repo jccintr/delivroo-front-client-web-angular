@@ -75,10 +75,10 @@ export interface LastOrderResponse {
 })
 export class StoreService {
 
-  private readonly BASE_API: string = 'https://api.delivroo.app.br/api';
-  public readonly BASE_STORAGE: string = 'https://api.delivroo.app.br/storage';
-  //private readonly BASE_API: string = 'http://127.0.0.1:8000/api';
-  //public readonly BASE_STORAGE: string = 'http://127.0.0.1:8000/storage';
+  //private readonly BASE_API: string = 'https://api.delivroo.app.br/api';
+  //public readonly BASE_STORAGE: string = 'https://api.delivroo.app.br/storage';
+  private readonly BASE_API: string = 'http://127.0.0.1:8000/api';
+  public readonly BASE_STORAGE: string = 'http://127.0.0.1:8000/storage';
   private waitTime: string = '';
   private storeid: number = 0;
   private pixData: PixData = {chave: '', favorecido: ''};
