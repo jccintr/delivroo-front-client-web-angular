@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pizza } from '../../../services/pizzas.service';
 import { CommonModule } from '@angular/common';
+import { StoreService } from '../../../services/store.service';
 
 @Component({
   selector: 'app-pizza-card',
@@ -15,6 +16,8 @@ export class PizzaCardComponent {
   @Input() disabled = false;
   @Input() tamanhoSelecionado: string = 'Broto';
   @Output() selecionar = new EventEmitter<Pizza>();
+
+  constructor(public storeService: StoreService) {}
 
   get precoExibido(): string {
     if (!this.pizza) return '—';

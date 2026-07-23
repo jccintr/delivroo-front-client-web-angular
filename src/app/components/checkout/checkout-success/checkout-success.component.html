@@ -1,6 +1,6 @@
 
 <main class="flex-1 max-w-md mx-auto w-full flex flex-col items-center px-6 pt-6">
-   <div class="relative w-full max-w-50 aspect-square mb-10 flex items-center justify-center">
+   <div class="relative w-full max-w-40 aspect-square mb-3 flex items-center justify-center">
       <div class="absolute inset-0 bg-success/5 rounded-full"></div>
       <div class="absolute inset-4 bg-success/10 rounded-full"></div>
       <div class="relative z-10 w-28 h-28 bg-success rounded-full flex items-center justify-center shadow-2xl shadow-success/40">
@@ -8,11 +8,25 @@
       </div>
    </div>
    <div class="text-center mb-8">
-      <h1 class="text-[#181311]  text-3xl font-bold leading-tight mb-3">Pedido Recebido!</h1>
+      <h1 class="text-[#181311]  text-2xl font-bold leading-tight mb-3">Pedido Recebido!</h1>
       <p class="text-[#181311]/70  text-base font-normal leading-relaxed px-4">
         O estabelecimento já recebeu sua solicitação e está preparando seu pedido.
       </p>
     </div>
+     <!-- Banner Braz Taxi - Link para Play Store -->
+  <div class="w-75 mb-8 rounded-2xl overflow-hidden shadow-md">
+    <a 
+      href="https://play.google.com/store/apps/details?id=com.jccintr.braztaxi" 
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img 
+        src="/banner-braz-taxi.png" 
+        alt="Braz Taxi - Baixe o App"
+        class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
+      >
+    </a>
+  </div>
     <!-- Seção de Pagamento via Pix -->
 @if(pix) {
 <div class="w-full max-w-sm bg-gray-50  rounded-2xl p-6 mb-10 border border-gray-200  shadow-sm">
@@ -36,7 +50,7 @@
          Copiar Chave
       </button>
    </div>
-
+  
    <!-- Mensagem de feedback (inicialmente escondida) -->
    <div id="copy-success" class="hidden mt-3 text-center text-success font-medium flex items-center justify-center gap-2">
       <span class="material-symbols-outlined text-xl">check_circle</span>
@@ -46,13 +60,13 @@
 }
 <!-- Fim da seção de Pagamento via Pix -->
 </main>
-<footer class="mt-auto p-6 max-w-md mx-auto w-full bg-white dark:bg-[#1c1c1c] border-t border-gray-100 ">
+<footer class="mt-auto p-6 max-w-md mx-auto w-full  border-t border-gray-100 ">
    <div class="flex flex-col gap-3">
       <button (click)="showLastOrder()" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2">
          <span class="material-symbols-outlined !fill-0 text-xl">map</span>
                 Acompanhar Pedido
       </button>
-      <button (click)="returnToHome()" class="w-full bg-transparent hover:bg-gray-100  text-[#181311] dark:text-white font-bold py-4 px-6 rounded-2xl transition-all border border-gray-200 ">
+      <button (click)="returnToHome()" class="w-full bg-transparent hover:bg-gray-100  text-[#181311]  font-bold py-4 px-6 rounded-2xl transition-all border border-gray-200 ">
                 Voltar ao Início
       </button>
    </div>

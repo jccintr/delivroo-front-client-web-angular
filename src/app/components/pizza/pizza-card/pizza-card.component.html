@@ -8,7 +8,7 @@
   (click)="onSelect()"
 >
   @if (pizza.imagem) {
-    <img [src]="pizza.imagem" alt="{{pizza.nome}}" class="w-20 h-20 object-cover rounded-lg" />
+    <img [src]="storeService.BASE_STORAGE + '/' + pizza.imagem" alt="{{pizza.nome}}" class="w-20 h-20 object-cover rounded-lg" />
   }
   <div class="flex-1">
     <h4 class="font-semibold text-slate-900">{{ pizza.nome }}</h4>
@@ -18,7 +18,7 @@
       R$ {{ precoExibido.replace('.', ',') }}
     </p>
   </div>
-  @if (selecionado) {
-    <span class="material-symbols-outlined text-primary self-center">check_circle</span>
-  }
+  
+  
+  
 </div>
