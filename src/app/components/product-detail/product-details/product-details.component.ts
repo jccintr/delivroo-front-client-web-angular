@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductHeaderComponent } from "../product-header/product-header.component";
 import { ProductDescriptionComponent } from "../product-description/product-description.component";
@@ -9,10 +9,11 @@ import { ProductInstructionsComponent } from "../product-instructions/product-in
 import { ProductAddComponent } from "../product-add/product-add.component";
 import { CartService } from '../../../services/cart.service';
 import { Location } from '@angular/common';
+import { AlertDialogComponent } from '../../alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductHeaderComponent, ProductDescriptionComponent, ProductRequiredItemComponent, ProductExtrasComponent, ProductInstructionsComponent, ProductAddComponent],
+  imports: [ProductHeaderComponent, ProductDescriptionComponent, ProductRequiredItemComponent, ProductExtrasComponent, ProductInstructionsComponent, ProductAddComponent,AlertDialogComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -26,6 +27,9 @@ export class ProductDetailsComponent implements OnInit{
   extras: { nome: string; valor: number }[] = [];
   requiredItems: { nome: string; valor: string }[] = [];
   instructions: string = '';
+
+  showAlertDialog = false
+  validationErrorMessage = signal('');
 
   constructor(private router: Router,private storeService: StoreService, private cartService: CartService,private location: Location) {}
   
@@ -70,7 +74,20 @@ export class ProductDetailsComponent implements OnInit{
   }
 
   onAddToCart() {
-    
+  
+    // verifica se todos os itens obrigatórios foram selecionados
+    const itemVazio = this.requiredItems.find(
+      (item) => !item.valor?.trim()
+    );
+
+    if (itemVazio) {
+      this.validationErrorMessage.set(
+        `Por favor, selecione uma opção de ${itemVazio.nome}`
+      );
+      this.showAlertDialog = true;
+      return;
+    }
+
     const itemCarrinho = {
       
       quantidade: this.quantity,
@@ -111,6 +128,10 @@ export class ProductDetailsComponent implements OnInit{
     this.productTotal = this.quantity * (precoBase + this.totalExtras);
    
   }
+
+  closeAlertDialog(){
+  this.showAlertDialog = false;
+}
 
 
 

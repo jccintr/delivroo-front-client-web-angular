@@ -36,3 +36,9 @@
     >
   </app-product-add>
 }
+@if (showAlertDialog) {
+<app-alert-dialog
+        [message]="validationErrorMessage()"
+        (closed)="closeAlertDialog()">
+</app-alert-dialog>
+}

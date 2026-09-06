@@ -17,7 +17,7 @@ export class ProductRequiredItemComponent implements OnInit {
  ngOnInit() {
     // Define a primeira opção como padrão
     if (this.item.opcoes && this.item.opcoes.length > 0) {
-      this.selectedOption = this.item.opcoes[0];
+      //this.selectedOption = this.item.opcoes[0];
       this.emitSelection();
     }
   }
